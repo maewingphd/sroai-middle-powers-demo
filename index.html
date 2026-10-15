@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#03060b">
+<title>SROAI · Middle-Power Strategic Autonomy Lab</title>
+<style>
+:root{
+ --bg:#03060b;--panel:#061019;--panel2:#0a1722;--line:#1a2c3b;--line2:#294052;
+ --text:#dfedf2;--dim:#91a9b6;--faint:#5f7885;--cyan:#64c7e8;--green:#43edaa;
+ --red:#ff5b7f;--gold:#ffc857;--violet:#b9a2ff;--white:#eef7fa;
+ --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+ --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans)}
+body{font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}.app{max-width:1560px;margin:0 auto;padding:18px 20px 28px}
+header{display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:13px}
+.brand{font:700 12px var(--mono);letter-spacing:.12em;color:var(--green)}
+h1{margin:0;font-size:27px;font-weight:620;letter-spacing:-.02em}.sub{color:var(--dim);font-size:13px;max-width:78ch}
+.rfp{margin-top:6px;font:600 10.5px var(--mono);letter-spacing:.04em;color:var(--gold)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 382px;gap:16px;margin-top:16px;align-items:start}
+.stage{min-width:0}.field{position:relative;border:1px solid var(--line);border-radius:14px;background:#010407;overflow:hidden;box-shadow:0 16px 38px rgba(0,0,0,.28)}
+#net{display:block;width:100%;height:min(70vh,690px);min-height:520px}
+.overlay{position:absolute;left:14px;top:13px;right:14px;display:flex;justify-content:space-between;gap:10px;pointer-events:none}
+.badge{padding:6px 9px;border:1px solid var(--line2);border-radius:999px;background:rgba(3,7,11,.82);backdrop-filter:blur(7px);font:600 10.5px var(--mono);letter-spacing:.04em}
+.badge.red{border-color:rgba(255,91,127,.55);color:#ffdbe4}.badge.gold{border-color:rgba(255,200,87,.55);color:#ffe7a8}.badge.green{border-color:rgba(67,237,170,.55);color:#d9fff0}
+.caption{position:absolute;left:16px;right:16px;bottom:16px;max-width:780px;padding:11px 13px;border:1px solid var(--line2);border-radius:12px;background:rgba(3,7,11,.84);backdrop-filter:blur(8px);font-size:14px;color:#cfe0e6;pointer-events:none}
+.caption b{color:var(--white)}.caption .small{display:block;margin-top:4px;color:var(--dim);font-size:12px}
+.legend{display:flex;gap:10px 18px;flex-wrap:wrap;margin-top:9px;color:var(--faint);font-size:11.5px}.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.metric{border:1px solid var(--line);background:var(--panel);padding:10px 11px;border-radius:10px;min-height:72px}.metric .k{font-size:10.5px;color:var(--faint);font-family:var(--mono);text-transform:uppercase;letter-spacing:.04em}.metric .v{font-size:18px;font-weight:680;margin-top:4px}.metric .s{font-size:11px;color:var(--dim);margin-top:2px}
+.side{position:sticky;top:10px;display:flex;flex-direction:column;gap:10px}.card{border:1px solid var(--line);background:var(--panel);border-radius:12px;overflow:hidden}.card h2{margin:0;padding:10px 12px;border-bottom:1px solid var(--line);font:650 11px var(--mono);letter-spacing:.05em;color:#a9c0cb}.body{padding:10px 11px}
+.step{font-size:11px;color:var(--gold);font-family:var(--mono);margin-bottom:6px}.scenario{width:100%;text-align:left;border:1px solid var(--line2);background:var(--panel2);border-radius:9px;padding:9px 10px;margin:0 0 7px;cursor:pointer;transition:.15s}.scenario:last-child{margin-bottom:0}.scenario:hover{border-color:#4c6b7c}.scenario[aria-pressed=true]{background:#10281f;border-color:#1d8b67;box-shadow:inset 3px 0 0 var(--green)}
+.scenario b{display:block;font-size:13.5px;font-weight:650}.scenario span{display:block;color:var(--dim);font-size:11.5px;margin-top:2px;line-height:1.35}.scenario .tag{display:inline-block;margin-top:5px;font:600 9.5px var(--mono);padding:2px 5px;border-radius:999px;border:1px solid var(--line2);color:var(--faint)}
+.player{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.btn{border:1px solid var(--line2);background:var(--panel2);border-radius:8px;padding:8px 6px;cursor:pointer;font-size:12px}.btn:hover{border-color:var(--green)}.btn.primary{background:#0c694d;border-color:#15845f;color:#edfff7;font-weight:650}
+.details{font-size:11.5px;color:var(--dim)}details summary{cursor:pointer;color:#cde0e7;font-weight:600;padding:2px 0 4px}.details p{margin:6px 0}.details a{color:#9cdcf1}.method{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.note{border-left:2px solid var(--gold);padding:7px 9px;background:rgba(255,200,87,.06);font-size:11.5px;color:#e6d4a1;border-radius:2px}
+.footer{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media(max-width:1100px){.layout{grid-template-columns:1fr}.side{position:static}.metrics{grid-template-columns:repeat(3,1fr)}#net{height:58vh;min-height:470px}}
+@media(max-width:650px){.app{padding:10px 11px 20px}.metrics{grid-template-columns:1fr}.layout{gap:10px}h1{font-size:22px}#net{height:56vh;min-height:420px}.caption{font-size:12.5px}.overlay{flex-direction:column;align-items:flex-start}.side{gap:8px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.scenario{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div><div class="brand">SROAI</div><h1>Middle-Power Strategic Autonomy Lab</h1>
+  <div class="rfp">RECOGNIZE THE STAKES · BUILD LEVERAGE · USE LEVERAGE WELL · COALITIONS &amp; COORDINATION</div></div>
+  <div class="sub">France worked case. A deliberately simple animated stress test: one upstream event fans through the network, exactly where a middle power can lose access, gain leverage, or stop the cascade.</div>
+</header>
+<div class="layout">
+  <main class="stage">
+    <div class="field">
+      <canvas id="net" role="img" aria-label="Animated fan-out of AI dependency shocks and middle-power responses"></canvas>
+      <div class="overlay"><div id="scenarioBadge" class="badge red">SYSTEMIC EVENT · ONE LAB</div><div id="phaseBadge" class="badge">PLAYING · UPSTREAM EVENT</div></div>
+      <div class="caption" id="caption"></div>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--cyan)"></i>frontier / upstream provider</span>
+      <span><i style="background:var(--green)"></i>middle-power capacity / substitute</span>
+      <span><i style="background:var(--red)"></i>access lost / service interrupted</span>
+      <span><i style="background:var(--gold)"></i>leverage / negotiated condition</span>
+      <span><i style="background:var(--violet)"></i>coalition support</span>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="k">What happens</div><div class="v" id="mImpact">Limited</div><div class="s" id="mImpactS">one branch loses access</div></div>
+      <div class="metric"><div class="k">Can France switch?</div><div class="v" id="mSwitch">Yes</div><div class="s" id="mSwitchS">domestic / alternative capacity exists</div></div>
+      <div class="metric"><div class="k">Systemic result</div><div class="v" id="mCascade">Contained</div><div class="s" id="mCascadeS">the disruption dies out</div></div>
+    </div>
+  </main>
+
+  <aside class="side">
+    <section class="card">
+      <h2>1 · RECOGNIZE THE STAKES</h2>
+      <div class="body">
+        <div class="step">Choose the systemic event</div>
+        <button class="scenario" data-s="oneLab" aria-pressed="true"><b>One-lab access loss</b><span>One dominant frontier lab stops serving France. Watch substitutes absorb the shock.</span><span class="tag">SYSTEMIC EVENT</span></button>
+        <button class="scenario" data-s="threeLabs" aria-pressed="false"><b>Three-lab lockout</b><span>OpenAI, Anthropic and Google access disappear together. The fan-out becomes visible.</span><span class="tag">LOCKOUT</span></button>
+        <button class="scenario" data-s="nvidia" aria-pressed="false"><b>Shared accelerator lockout</b><span>NVIDIA access is lost. Two apparently sovereign French paths fail together because they share the same substrate.</span><span class="tag">COMMON DEPENDENCY</span></button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2 · BUILD LEVERAGE</h2>
+      <div class="body"><button class="scenario" data-s="leverage" aria-pressed="false"><b>Make France costly to exclude</b><span>Grow Mistral / French compute until foreign companies depend on it. The fan-out reverses.</span><span class="tag">BUILD LEVERAGE</span></button></div>
+    </section>
+
+    <section class="card">
+      <h2>3 · USE LEVERAGE WELL</h2>
+      <div class="body"><button class="scenario" data-s="deal" aria-pressed="false"><b>Compute-for-access deal</b><span>France trades scarce hosting capacity for reliable model access, advance notice and evaluation access.</span><span class="tag">RELIABLE ACCESS + SAFETY</span></button></div>
+    </section>
+
+    <section class="card">
+      <h2>4 · COALITIONS &amp; COORDINATION</h2>
+      <div class="body"><button class="scenario" data-s="coalition" aria-pressed="false"><b>France + Germany + Canada</b><span>Partner capacity enters only where France cannot substitute alone. Watch the red branches turn back on.</span><span class="tag">JOINT DEAL</span></button></div>
+    </section>
+
+    <section class="card"><h2>PLAYBACK</h2><div class="body"><div class="player"><button id="play" class="btn primary">Pause</button><button id="restart" class="btn">Restart</button><button id="speed" class="btn">Speed 1×</button></div></div></section>
+
+    <section class="card"><h2>WHAT THIS IS</h2><div class="body details">
+      <div class="note">This prototype does not forecast the probability of a lockout. It shows how a specified event propagates through a dependency structure and where leverage or substitutes stop it.</div>
+      <details><summary>Evidence &amp; assumptions</summary>
+        <p>France is the worked case. Structural examples use public relationships; the widths and recovery shares shown here are illustrative scenario settings for demonstration.</p>
+        <p>Primary references include the <a href="https://middlepowers.ai/" target="_blank" rel="noopener">Middle Powers RFP</a>, <a href="https://mistral.ai/news/regional-inference-open-models-new-compute/" target="_blank" rel="noopener">Mistral sovereign-compute announcements</a>, and the <a href="https://news.microsoft.com/source/2026/07/21/microsoft-and-mistral-expand-strategic-partnership-to-give-enterprises-and-regulated-industries-frontier-ai-they-can-control" target="_blank" rel="noopener">Microsoft–Mistral partnership</a>.</p>
+      </details>
+      <details><summary>Technical method</summary><p class="method">SROAI separates the size of exposed activity from whether disruption attenuates or amplifies as it moves downstream. In the full method, propagation depends on exposure, within-window non-recoverability and fan-out. The visual intentionally translates those quantities into plain-language outcomes.</p></details>
+    </div></section>
+  </aside>
+</div>
+<div class="footer"><span>Prototype · conditional scenarios, not event probabilities</span><span>M. Antony Ewing · Conquer Risk / CMH Scientific</span></div>
+</div>
+<script>
+(()=>{
+"use strict";
+const $=id=>document.getElementById(id), cv=$("net"), ctx=cv.getContext("2d");
+let W=1000,H=620,DPR=1,last=performance.now(),clock=0,playing=true,speed=1,active="oneLab";
+const C={bg:"#010407",cyan:"#64c7e8",green:"#43edaa",red:"#ff5b7f",gold:"#ffc857",violet:"#b9a2ff",dim:"#5f7885",text:"#e8f4f6",line:"#203441"};
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+function rng(seed){let x=seed>>>0;return()=>((x=(1664525*x+1013904223)>>>0)/4294967296)}
+const rnd=rng(20261014);
+
+const BASE={
+ labs:[{id:"openai",n:"OpenAI",x:.10,y:.23},{id:"anthropic",n:"Anthropic",x:.10,y:.47},{id:"google",n:"Google",x:.10,y:.71}],
+ nvidia:{id:"nvidia",n:"NVIDIA",x:.10,y:.47},
+ france:{id:"france",n:"FRANCE · AI ACCESS",x:.39,y:.45},
+ mistral:{id:"mistral",n:"Mistral",x:.37,y:.24},
+ fcloud:{id:"fcloud",n:"French sovereign cloud",x:.37,y:.70},
+ sectors:[
+  {id:"def",n:"Defense",x:.69,y:.14},{id:"health",n:"Health",x:.73,y:.27},{id:"cyber",n:"Cyber",x:.70,y:.40},
+  {id:"finance",n:"Finance",x:.75,y:.53},{id:"industry",n:"Industry",x:.70,y:.66},{id:"public",n:"Public administration",x:.74,y:.79},{id:"research",n:"Research",x:.68,y:.90}
+ ],
+ foreign:[{id:"msft",n:"Microsoft",x:.70,y:.22},{id:"eu",n:"European users",x:.75,y:.44},{id:"industry2",n:"Foreign industry",x:.71,y:.70}],
+ coalition:[{id:"germany",n:"Germany",x:.16,y:.27},{id:"canada",n:"Canada",x:.16,y:.68}]
+};
+const leaves=[]; for(const s of BASE.sectors){for(let i=0;i<12;i++){const a=(rnd()-.5)*1.7, rr=.075+.065*rnd();leaves.push({sector:s.id,x:clamp(s.x+rr*Math.cos(a),.77,.97),y:clamp(s.y+rr*Math.sin(a),.06,.95),r:1.1+1.6*rnd(),ph:rnd()*6.28})}}
+
+const SC={
+ oneLab:{badge:"SYSTEMIC EVENT · ONE LAB",badgeClass:"red",title:"One frontier lab goes dark. The shock reaches France, but alternative frontier access and Mistral keep most branches alive.",small:"The policy question is simple: does the event die out, or does it continue through critical services?",impact:"Limited",impactS:"one part of frontier access is lost",sw:"Yes",swS:"other labs + Mistral absorb the shock",cascade:"Contained",cascadeS:"the fan-out fades before the periphery",kind:"labs",lost:["anthropic"],sectorLoss:["cyber"],duration:8},
+ threeLabs:{badge:"LOCKOUT · THREE FRONTIER LABS",badgeClass:"red",title:"All three globally dominant lab routes disappear together. Domestic capacity helps, but it cannot replace the full frontier-access layer inside the window.",small:"This is the sovereignty problem in the RFP: reliable access becomes a precondition for a functioning economy and security apparatus.",impact:"Broad",impactS:"most frontier-dependent branches are hit",sw:"Partly",swS:"Mistral carries only part of the load",cascade:"Amplifying",cascadeS:"the interruption reaches the periphery",kind:"labs",lost:["openai","anthropic","google"],sectorLoss:["def","health","cyber","finance","industry","public"],duration:8},
+ nvidia:{badge:"COMMON DEPENDENCY · NVIDIA",badgeClass:"red",title:"The upstream node is no longer a model lab. NVIDIA is removed and two French routes that looked separate fail together because both sit on the same accelerator substrate.",small:"Two sovereign providers are not two independent fallbacks when the same upstream trigger disables both.",impact:"Common-mode",impactS:"Mistral + French cloud are hit together",sw:"No",swS:"the shared substrate removes both paths",cascade:"Amplifying",cascadeS:"diversification collapses to one trigger",kind:"nvidia",lost:["nvidia"],sectorLoss:["def","health","cyber","finance","industry"],duration:8},
+ leverage:{badge:"BUILD LEVERAGE · FRANCE",badgeClass:"gold",title:"Now the fan-out reverses. As foreign workloads depend on Mistral models and French compute, France moves onto other parties’ critical paths.",small:"Leverage is not a slogan here: it is the growing cost to others of excluding the French node.",impact:"Leverage rises",impactS:"foreign activity now depends on France",sw:"Not the point",swS:"the direction of dependence has reversed",cascade:"Outward",cascadeS:"France becomes costly to exclude",kind:"leverage",lost:[],sectorLoss:[],duration:8},
+ deal:{badge:"USE LEVERAGE WELL · COMPUTE-FOR-ACCESS",badgeClass:"gold",title:"France uses hosting leverage to secure reliable frontier access, advance notice and evaluation access. When a provider changes terms, the notice window gives critical services time to switch.",small:"The same leverage that keeps France relevant is spent on the safety and access outcomes named in the RFP.",impact:"Reduced",impactS:"the lockout reaches fewer critical branches",sw:"Yes",swS:"advance notice opens a switching window",cascade:"Stopped early",cascadeS:"conditions prevent the full fan-out",kind:"deal",lost:["anthropic"],sectorLoss:["cyber"],duration:8},
+ coalition:{badge:"COALITIONS & COORDINATION",badgeClass:"green",title:"France cannot replace every missing input alone. Germany and Canada supply complementary capacity only where France has a gap, restoring critical branches without pretending every partner can substitute for everything.",small:"The coalition is valuable because the capacities are complementary, not because more flags were added to the screen.",impact:"Shared",impactS:"partners cover specific missing routes",sw:"Yes, jointly",swS:"coalition support restores key branches",cascade:"Contained",cascadeS:"joint capacity stops the lockout",kind:"coalition",lost:["openai","anthropic","google"],sectorLoss:["def","health"],duration:8}
+};
+
+function size(){const r=cv.getBoundingClientRect();W=Math.max(600,Math.round(r.width));H=Math.max(420,Math.round(r.height));DPR=Math.min(window.devicePixelRatio||1,2);cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0)}
+new ResizeObserver(size).observe(cv); size();
+function P(n){return{x:n.x*W,y:n.y*H}}
+function glow(x,y,r,col,a=1){const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,rgba(col,.75*a));g.addColorStop(.28,rgba(col,.34*a));g.addColorStop(1,rgba(col,0));ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill()}
+function rgba(hex,a){const v=parseInt(hex.slice(1),16);return`rgba(${v>>16},${(v>>8)&255},${v&255},${a})`}
+function bez(a,b,bend=0){const A=P(a),B=P(b),mx=(A.x+B.x)/2,my=(A.y+B.y)/2+bend*H;return{A,B,c1:{x:mx,y:A.y+bend*H*.25},c2:{x:mx,y:B.y+bend*H*.25}}}
+function pt(cur,t){const u=1-t;return{x:u*u*u*cur.A.x+3*u*u*t*cur.c1.x+3*u*t*t*cur.c2.x+t*t*t*cur.B.x,y:u*u*u*cur.A.y+3*u*u*t*cur.c1.y+3*u*t*t*cur.c2.y+t*t*t*cur.B.y}}
+function edge(a,b,col,alpha=.28,width=1,bend=0,pulse=null){const q=bez(a,b,bend);ctx.strokeStyle=rgba(col,alpha);ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(q.A.x,q.A.y);ctx.bezierCurveTo(q.c1.x,q.c1.y,q.c2.x,q.c2.y,q.B.x,q.B.y);ctx.stroke();if(pulse!=null&&pulse>0&&pulse<1){const z=pt(q,pulse);glow(z.x,z.y,10,col,.95);ctx.fillStyle=rgba(col,.95);ctx.beginPath();ctx.arc(z.x,z.y,2.3,0,6.283);ctx.fill()}}
+function node(n,col,active=1,ring=false){const p=P(n),r=(n.id==="france"?9:7);if(active>0)glow(p.x,p.y,r*(3.0+active),col,.25+.6*active);ctx.fillStyle=rgba(col,.45+.5*active);ctx.beginPath();ctx.arc(p.x,p.y,r,0,6.283);ctx.fill();if(ring){ctx.strokeStyle=rgba(C.gold,.85);ctx.lineWidth=2;ctx.beginPath();ctx.arc(p.x,p.y,r+7+3*Math.sin(clock*3),0,6.283);ctx.stroke()}ctx.font=`600 ${n.id==="france"?12:11}px ${getComputedStyle(document.body).fontFamily}`;ctx.fillStyle="#cfe0e6";ctx.textBaseline="middle";ctx.fillText(n.n,p.x+r+8,p.y)}
+function sector(s,state){const col=state==="loss"?C.red:state==="support"?C.violet:state==="gain"?C.green:C.dim;node(s,col,state==="neutral"?.25:.9)}
+function bg(){ctx.clearRect(0,0,W,H);ctx.fillStyle=C.bg;ctx.fillRect(0,0,W,H);const g=ctx.createRadialGradient(W*.48,H*.45,0,W*.48,H*.45,W*.65);g.addColorStop(0,"rgba(20,48,60,.20)");g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H)}
+function pulse(t0,t1){return clamp((clock-t0)/(t1-t0),0,1)}
+function drawLeaves(lossSet,supportSet){for(const l of leaves){const s=BASE.sectors.find(x=>x.id===l.sector),state=lossSet.has(s.id)?"loss":supportSet.has(s.id)?"support":"gain",col=state==="loss"?C.red:state==="support"?C.violet:C.green;const hub=P(s);ctx.strokeStyle=rgba(col,.055);ctx.lineWidth=.55;ctx.beginPath();ctx.moveTo(hub.x,hub.y);ctx.quadraticCurveTo((hub.x+l.x*W)/2,(hub.y+l.y*H)/2+7*Math.sin(l.ph),l.x*W,l.y*H);ctx.stroke();const a=.18+.45*(.5+.5*Math.sin(clock*1.8+l.ph));glow(l.x*W,l.y*H,l.r*4,col,a*.35);ctx.fillStyle=rgba(col,.33+a*.25);ctx.fillRect(l.x*W-1,l.y*H-1,2,2)}}
+function drawLabsScenario(sc){const lp=pulse(.4,2.6),fp=pulse(2.1,4.6),pp=pulse(4.0,7.0),lost=new Set(sc.lost),sl=new Set(sc.sectorLoss),support=new Set();
+  BASE.labs.forEach((l,i)=>{const bad=lost.has(l.id);node(l,bad?C.red:C.cyan,bad?.95:.55);edge(l,BASE.france,bad?C.red:C.cyan,bad?.40:.13,bad?1.4:.8,(i-1)*.03,bad?lp:null)});
+  node(BASE.mistral,C.green,.9);edge(BASE.mistral,BASE.france,C.green,.32,1.2,.03,fp);
+  node(BASE.france,sl.size>3?C.red:C.green,.85);
+  BASE.sectors.forEach((s,i)=>{const bad=sl.has(s.id);edge(BASE.france,s,bad?C.red:C.green,bad?.33:.13,bad?1.3:.8,(i-3)*.004,bad?fp:pp);sector(s,bad?"loss":"gain")});drawLeaves(sl,support);
+}
+function drawNvidia(sc){const p1=pulse(.5,2.4),p2=pulse(2.0,4.4),p3=pulse(4.0,7.1),sl=new Set(sc.sectorLoss),support=new Set();node(BASE.nvidia,C.red,.95);node(BASE.mistral,C.red,.9);node(BASE.fcloud,C.red,.9);edge(BASE.nvidia,BASE.mistral,C.red,.45,1.5,-.05,p1);edge(BASE.nvidia,BASE.fcloud,C.red,.45,1.5,.05,p1);edge(BASE.mistral,BASE.france,C.red,.38,1.4,.02,p2);edge(BASE.fcloud,BASE.france,C.red,.38,1.4,-.02,p2);node(BASE.france,C.red,.95);BASE.sectors.forEach((s,i)=>{const bad=sl.has(s.id);edge(BASE.france,s,bad?C.red:C.green,bad?.34:.12,bad?1.3:.8,(i-3)*.004,bad?p3:null);sector(s,bad?"loss":"gain")});drawLeaves(sl,support)}
+function drawLeverage(){const p1=pulse(.6,2.7),p2=pulse(2.5,6.6),support=new Set(),loss=new Set();BASE.labs.forEach(l=>node(l,C.cyan,.16));node(BASE.france,C.gold,.85,true);node(BASE.mistral,C.gold,.95,true);edge(BASE.france,BASE.mistral,C.gold,.35,1.5,-.02,p1);BASE.foreign.forEach((f,i)=>{edge(BASE.mistral,f,C.gold,.38,1.45,(i-1)*.03,p2);node(f,C.gold,.75)});for(const f of BASE.foreign){for(let i=0;i<18;i++){const a=(rnd()-.5)*1.1, rr=.055+.04*rnd(),x=clamp(f.x+rr*Math.cos(a),.78,.97),y=clamp(f.y+rr*Math.sin(a),.07,.94);ctx.strokeStyle=rgba(C.gold,.05);ctx.beginPath();const F=P(f);ctx.moveTo(F.x,F.y);ctx.lineTo(x*W,y*H);ctx.stroke();glow(x*W,y*H,3.5,C.gold,.18)}}}
+function drawDeal(){const lp=pulse(.5,2.2),goldp=pulse(1.8,3.5),greenp=pulse(3.2,6.5),sl=new Set(["cyber"]),support=new Set();BASE.labs.forEach((l,i)=>{const bad=l.id==="anthropic";node(l,bad?C.red:C.cyan,bad?.9:.35);edge(l,BASE.france,bad?C.red:C.cyan,bad?.3:.08,1,(i-1)*.03,bad?lp:null)});node(BASE.mistral,C.gold,.9,true);edge(BASE.mistral,BASE.france,C.gold,.45,1.6,.02,goldp);node(BASE.france,C.green,.9);const fp=P(BASE.france),mp=P(BASE.mistral);ctx.font=`700 10px ${getComputedStyle(document.body).fontFamily}`;ctx.fillStyle="#ffd989";ctx.fillText("COMPUTE ↔ RELIABLE ACCESS",(fp.x+mp.x)/2-30,(fp.y+mp.y)/2-12);BASE.sectors.forEach((s,i)=>{const bad=sl.has(s.id);edge(BASE.france,s,bad?C.red:C.green,bad?.22:.24,bad?1.0:1.2,(i-3)*.004,greenp);sector(s,bad?"loss":"gain")});drawLeaves(sl,support)}
+function drawCoalition(){const redp=pulse(.4,2.5),sup=pulse(2.2,4.3),out=pulse(4.0,7.1),sl=new Set(["def","health"]),support=new Set(["cyber","finance","industry","public","research"]);BASE.labs.forEach((l,i)=>{node(l,C.red,.85);edge(l,BASE.france,C.red,.30,1.2,(i-1)*.03,redp)});BASE.coalition.forEach((p,i)=>{node(p,C.violet,.95,true);edge(p,BASE.france,C.violet,.42,1.5,(i?-.03:.03),sup)});node(BASE.mistral,C.green,.75);edge(BASE.mistral,BASE.france,C.green,.22,1.1,.02,sup);node(BASE.france,C.violet,.9);BASE.sectors.forEach((s,i)=>{const bad=sl.has(s.id),help=support.has(s.id);edge(BASE.france,s,bad?C.red:C.violet,bad?.24:.26,bad?1.1:1.25,(i-3)*.004,out);sector(s,bad?"loss":help?"support":"gain")});drawLeaves(sl,support)}
+function draw(){bg();const sc=SC[active];if(sc.kind==="labs")drawLabsScenario(sc);else if(sc.kind==="nvidia")drawNvidia(sc);else if(sc.kind==="leverage")drawLeverage();else if(sc.kind==="deal")drawDeal();else drawCoalition();
+ ctx.font=`500 10px ui-monospace,SFMono-Regular,Menlo,monospace`;ctx.fillStyle=C.dim;ctx.fillText(active==="leverage"?"FRANCE / MISTRAL":"UPSTREAM",14,H-12);ctx.textAlign="right";ctx.fillText(active==="leverage"?"FOREIGN DEPENDENTS":"CRITICAL SERVICES → DOWNSTREAM ORGANIZATIONS",W-14,H-12);ctx.textAlign="left"}
+function renderText(){const sc=SC[active],b=$("scenarioBadge");b.textContent=sc.badge;b.className="badge "+sc.badgeClass;$("caption").innerHTML=`<b>${sc.title}</b><span class="small">${sc.small}</span>`;$("mImpact").textContent=sc.impact;$("mImpactS").textContent=sc.impactS;$("mSwitch").textContent=sc.sw;$("mSwitchS").textContent=sc.swS;$("mCascade").textContent=sc.cascade;$("mCascadeS").textContent=sc.cascadeS;}
+function setScenario(s){active=s;clock=0;document.querySelectorAll(".scenario").forEach(b=>b.setAttribute("aria-pressed",b.dataset.s===s?"true":"false"));renderText()}
+document.querySelectorAll(".scenario").forEach(b=>b.addEventListener("click",()=>setScenario(b.dataset.s)));
+$("play").addEventListener("click",()=>{playing=!playing;$("play").textContent=playing?"Pause":"Play";$("phaseBadge").textContent=playing?"PLAYING · NETWORK RESPONSE":"PAUSED"});
+$("restart").addEventListener("click",()=>{clock=0;playing=true;$("play").textContent="Pause";$("phaseBadge").textContent="PLAYING · UPSTREAM EVENT"});
+$("speed").addEventListener("click",()=>{speed=speed===1?1.5:speed===1.5?.65:1;$("speed").textContent=`Speed ${speed===.65?"0.65":speed}×`});
+function tick(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(playing){clock+=dt*speed;if(clock>SC[active].duration)clock=0}draw();requestAnimationFrame(tick)}
+renderText();requestAnimationFrame(tick);
+})();
+</script>
+</body></html>
