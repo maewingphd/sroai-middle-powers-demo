@@ -5,178 +5,958 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#03060b">
 <title>SROAI · Middle-Power Strategic Autonomy Lab</title>
+<meta name="description" content="France worked case: what a US cut-off would do to France's critical AI, how France becomes costly to exclude, what to ask for, and which partners close the gap. Every number is computed live.">
 <style>
 :root{
- --bg:#03060b;--panel:#061019;--panel2:#0a1722;--line:#1a2c3b;--line2:#294052;
- --text:#dfedf2;--dim:#91a9b6;--faint:#5f7885;--cyan:#64c7e8;--green:#43edaa;
- --red:#ff5b7f;--gold:#ffc857;--violet:#b9a2ff;--white:#eef7fa;
+ --bg:#02050a;--panel:rgba(5,12,19,.86);--line:#1a2c3b;--line2:#2a4254;--text:#e1eef3;--dim:#93aab7;--faint:#5f7988;
+ --cyan:#64c7e8;--green:#43edaa;--red:#ff5b7f;--gold:#ffc857;--violet:#b9a2ff;--white:#eef7fa;
  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
-*{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans)}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans)}
 body{font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
-button{font:inherit;color:inherit}.app{max-width:1560px;margin:0 auto;padding:18px 20px 28px}
-header{display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:13px}
-.brand{font:700 12px var(--mono);letter-spacing:.12em;color:var(--green)}
-h1{margin:0;font-size:27px;font-weight:620;letter-spacing:-.02em}.sub{color:var(--dim);font-size:13px;max-width:78ch}
-.rfp{margin-top:6px;font:600 10.5px var(--mono);letter-spacing:.04em;color:var(--gold)}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 382px;gap:16px;margin-top:16px;align-items:start}
-.stage{min-width:0}.field{position:relative;border:1px solid var(--line);border-radius:14px;background:#010407;overflow:hidden;box-shadow:0 16px 38px rgba(0,0,0,.28)}
-#net{display:block;width:100%;height:min(70vh,690px);min-height:520px}
-.overlay{position:absolute;left:14px;top:13px;right:14px;display:flex;justify-content:space-between;gap:10px;pointer-events:none}
-.badge{padding:6px 9px;border:1px solid var(--line2);border-radius:999px;background:rgba(3,7,11,.82);backdrop-filter:blur(7px);font:600 10.5px var(--mono);letter-spacing:.04em}
-.badge.red{border-color:rgba(255,91,127,.55);color:#ffdbe4}.badge.gold{border-color:rgba(255,200,87,.55);color:#ffe7a8}.badge.green{border-color:rgba(67,237,170,.55);color:#d9fff0}
-.caption{position:absolute;left:16px;right:16px;bottom:16px;max-width:780px;padding:11px 13px;border:1px solid var(--line2);border-radius:12px;background:rgba(3,7,11,.84);backdrop-filter:blur(8px);font-size:14px;color:#cfe0e6;pointer-events:none}
-.caption b{color:var(--white)}.caption .small{display:block;margin-top:4px;color:var(--dim);font-size:12px}
-.legend{display:flex;gap:10px 18px;flex-wrap:wrap;margin-top:9px;color:var(--faint);font-size:11.5px}.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.metric{border:1px solid var(--line);background:var(--panel);padding:10px 11px;border-radius:10px;min-height:72px}.metric .k{font-size:10.5px;color:var(--faint);font-family:var(--mono);text-transform:uppercase;letter-spacing:.04em}.metric .v{font-size:18px;font-weight:680;margin-top:4px}.metric .s{font-size:11px;color:var(--dim);margin-top:2px}
-.side{position:sticky;top:10px;display:flex;flex-direction:column;gap:10px}.card{border:1px solid var(--line);background:var(--panel);border-radius:12px;overflow:hidden}.card h2{margin:0;padding:10px 12px;border-bottom:1px solid var(--line);font:650 11px var(--mono);letter-spacing:.05em;color:#a9c0cb}.body{padding:10px 11px}
-.step{font-size:11px;color:var(--gold);font-family:var(--mono);margin-bottom:6px}.scenario{width:100%;text-align:left;border:1px solid var(--line2);background:var(--panel2);border-radius:9px;padding:9px 10px;margin:0 0 7px;cursor:pointer;transition:.15s}.scenario:last-child{margin-bottom:0}.scenario:hover{border-color:#4c6b7c}.scenario[aria-pressed=true]{background:#10281f;border-color:#1d8b67;box-shadow:inset 3px 0 0 var(--green)}
-.scenario b{display:block;font-size:13.5px;font-weight:650}.scenario span{display:block;color:var(--dim);font-size:11.5px;margin-top:2px;line-height:1.35}.scenario .tag{display:inline-block;margin-top:5px;font:600 9.5px var(--mono);padding:2px 5px;border-radius:999px;border:1px solid var(--line2);color:var(--faint)}
-.player{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.btn{border:1px solid var(--line2);background:var(--panel2);border-radius:8px;padding:8px 6px;cursor:pointer;font-size:12px}.btn:hover{border-color:var(--green)}.btn.primary{background:#0c694d;border-color:#15845f;color:#edfff7;font-weight:650}
-.details{font-size:11.5px;color:var(--dim)}details summary{cursor:pointer;color:#cde0e7;font-weight:600;padding:2px 0 4px}.details p{margin:6px 0}.details a{color:#9cdcf1}.method{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
-.note{border-left:2px solid var(--gold);padding:7px 9px;background:rgba(255,200,87,.06);font-size:11.5px;color:#e6d4a1;border-radius:2px}
-.footer{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-@media(max-width:1100px){.layout{grid-template-columns:1fr}.side{position:static}.metrics{grid-template-columns:repeat(3,1fr)}#net{height:58vh;min-height:470px}}
-@media(max-width:650px){.app{padding:10px 11px 20px}.metrics{grid-template-columns:1fr}.layout{gap:10px}h1{font-size:22px}#net{height:56vh;min-height:420px}.caption{font-size:12.5px}.overlay{flex-direction:column;align-items:flex-start}.side{gap:8px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.scenario{transition:none}}
+button{font:inherit;color:inherit}
+.app{max-width:1600px;margin:0 auto;padding:14px 18px 24px}
+header{display:flex;gap:10px 22px;align-items:flex-end;flex-wrap:wrap;padding-bottom:10px}
+.brand{font:700 11.5px var(--mono);letter-spacing:.14em;color:var(--green)}
+h1{margin:2px 0 0;font-size:26px;font-weight:640;letter-spacing:-.02em}
+.pillars{margin-top:5px;font:600 10.5px var(--mono);letter-spacing:.05em;color:var(--gold)}
+.sub{color:var(--dim);font-size:13.5px;max-width:70ch}
+.stage{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#010307;box-shadow:0 18px 50px rgba(0,0,0,.45)}
+#cv{display:block;width:100%;height:clamp(700px,86vh,900px);touch-action:none;cursor:grab}
+.steps{position:absolute;left:12px;top:12px;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 380px);z-index:3}
+.chip{border:1px solid var(--line2);background:rgba(4,10,16,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:999px;padding:6px 11px;cursor:pointer;font:600 11.5px var(--sans);color:#cfe1e8;white-space:nowrap;transition:border-color .15s,background .15s}
+.chip:hover{border-color:#5d8396}.chip.on{background:#10291f;border-color:#2aa57a;color:#eafff5}.chip.tour.on{background:#2a2108;border-color:#c99a2e;color:#fff1cf}
+.chip .n{display:inline-block;width:16px;height:16px;border-radius:50%;background:#173040;color:#bfe;font:700 10px var(--mono);line-height:16px;text-align:center;margin-right:5px}
+.cap .hint{display:block;margin-top:6px;font:500 11.5px var(--sans);color:#8fb0bf}
+.cap .hint b{color:#d6e9f0;font-weight:600}
+.cap{position:absolute;left:14px;bottom:14px;max-width:min(680px,calc(100% - 580px));min-width:300px;padding:9px 13px;border:1px solid var(--line2);border-radius:12px;background:var(--panel);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);font-size:13.5px;line-height:1.42;color:#d3e4ea;z-index:3;pointer-events:none;transition:opacity .35s}
+.cap b{color:#fff}.cap .k{display:block;font:700 10px var(--mono);letter-spacing:.08em;color:var(--gold);margin-bottom:3px}
+.dock{position:absolute;right:362px;bottom:14px;display:flex;gap:6px;z-index:3}
+.hud{position:absolute;right:12px;top:10px;bottom:10px;width:336px;display:flex;flex-direction:column;gap:6px;z-index:3;overflow:auto;scrollbar-width:thin}
+.card{border:1px solid var(--line2);border-radius:13px;background:var(--panel);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:9px 11px}
+.kk{font:700 10px var(--mono);letter-spacing:.09em;color:#8fb2c2;text-transform:uppercase}
+.ev{font-size:12.5px;line-height:1.3;color:#fff;font-weight:600;margin-top:3px}
+.big{display:flex;align-items:baseline;gap:10px;margin-top:4px}
+.big .num{flex:none;font:700 44px/1 var(--sans);letter-spacing:-.02em;color:var(--white);font-variant-numeric:tabular-nums}
+.big .lbl{font-size:13px;color:#cfe0e6;line-height:1.3}
+.small{font-size:11px;color:var(--dim);margin-top:4px}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:7px}
+.m{border:1px solid var(--line);border-radius:10px;padding:6px 7px;background:rgba(2,7,12,.6)}
+.m .v{font:700 20px/1.05 var(--sans);font-variant-numeric:tabular-nums;color:#fff}
+.m .l{font-size:10px;color:var(--dim);margin-top:2px;line-height:1.22}
+.bigs{display:grid;grid-template-columns:1fr 1.15fr;gap:10px;margin-top:5px;align-items:end}
+.bigs .num{font:700 38px/1 var(--sans);letter-spacing:-.02em;color:var(--white);font-variant-numeric:tabular-nums}
+.bigs .num.eu{font-size:32px;color:#ffd7a0}
+.bigs .lbl{font-size:11.5px;color:#cfe0e6;line-height:1.25;margin-top:4px}
+.chip i{font-style:italic;font-weight:500;color:#8fb2c2;margin-left:3px}
+.chip.on i{color:#bfeedd}
+@media (max-width:1480px){.steps .chip i{display:none}}
+.sub2{font-size:11px;color:#cfdde3;margin-top:3px}.sub2 b{color:#ffe1a0}.sub2 i{color:#a9bcc5}
+.levrow{display:flex;align-items:baseline;gap:9px;margin-top:3px}
+.num2{font:700 24px/1.05 var(--sans);font-variant-numeric:tabular-nums}
+.levrow .lbl{font-size:11.5px;color:#cfe0e6;line-height:1.25}
+.wrow{display:grid;grid-template-columns:16px 136px 1fr 94px;gap:6px;align-items:center;margin-top:4px;font-size:11px}
+.wrow .wn{font:700 10px var(--mono);color:#bfe;background:#173040;border-radius:50%;width:16px;height:16px;line-height:16px;text-align:center}
+.wrow .wl{color:#dfeef3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.wrow .wl i{color:#8fb2c2;font-size:10.5px}
+.wrow .wb{height:9px;background:#0d1d27;border-radius:5px;overflow:hidden}.wrow .wb i{display:block;height:100%;border-radius:5px}
+.wrow .wv{text-align:right;font-variant-numeric:tabular-nums;color:#fff;font-weight:600;white-space:nowrap}
+.wrow.off{opacity:.42}.wrow.off .wv{font-weight:500;color:#9fb6c0;font-size:10.5px}
+.wrow.cur .wl{color:#fff;font-weight:600}
+.wsum{margin-top:5px;font-size:11px;color:#cfe0e6}.wsum b{color:#bff7df}
+#hLs{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.leg{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (min-width:1000px) and (max-height:860px){#lS,#hLs{display:none}.bigs .num{font-size:32px}.bigs .num.eu{font-size:27px}.m .v{font-size:18px}.wrow{margin-top:2px}.card{padding:8px 10px}.hud{gap:5px}}
+.hot{color:var(--red)!important}.ok{color:var(--green)!important}.au{color:var(--gold)!important}.vi{color:var(--violet)!important}
+.nosub{margin-top:6px;font-size:11px;color:#ffc2cf}
+.bar{position:relative;height:6px;border-radius:6px;background:#0d1d27;margin:7px 0 4px;overflow:visible}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:linear-gradient(90deg,#7a5a14,#ffc857)}
+.bar b{position:absolute;top:-4px;bottom:-4px;width:2px;background:#fff;opacity:.8}
+.bar em{position:absolute;top:-15px;font:600 9.5px var(--mono);color:#cfdde3;transform:translateX(-8%);font-style:normal;white-space:nowrap}
+.terms{display:flex;gap:4px;flex-wrap:nowrap;margin-top:5px}
+.term{flex:1 1 0;min-width:0;border:1px solid #5b4a1e;background:rgba(40,30,8,.55);color:#ffe7ae;border-radius:9px;padding:6px 4px;cursor:pointer;font:600 10.5px var(--sans);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.term:hover{border-color:#d7a73c}.term.on{background:#5a4210;border-color:#ffc857;color:#fff}
+.term.locked{opacity:.38;cursor:not-allowed}
+.term.flash,.chip.flash{box-shadow:0 0 0 3px rgba(255,220,140,.85),0 0 22px rgba(255,200,90,.7)}
+.nash{display:flex;height:7px;border-radius:5px;overflow:hidden;margin:5px 0 3px;background:#0d1d27}
+.nash span{display:block;height:100%}
+.leg{font-size:10.5px;color:var(--dim);line-height:1.32}
+.sw{display:inline-block;width:8px;height:8px;border-radius:2px;margin:0 4px 0 1px;vertical-align:0}
+.cbtn{border:1px solid #4b3f78;background:rgba(30,22,60,.6);color:#e6ddff;border-radius:9px;padding:4px 9px;cursor:pointer;font:600 11px var(--sans);margin-top:5px}
+.cbtn[disabled]{opacity:.4;cursor:not-allowed}
+.cbtn:hover{border-color:var(--violet)}
+.tip{position:absolute;z-index:5;pointer-events:none;max-width:270px;padding:8px 10px;border:1px solid var(--line2);border-radius:10px;background:rgba(3,8,13,.94);font-size:12px;color:#dbe9ee;opacity:0;transition:opacity .12s}
+.tip b{color:#fff}.tip .a{display:block;margin-top:4px;color:var(--gold);font-weight:600}
+details.more{margin-top:12px;border:1px solid var(--line);border-radius:12px;background:#040b11;padding:10px 14px;color:var(--dim);font-size:12.5px}
+details.more summary{cursor:pointer;color:#cfe0e6;font-weight:600}
+details.more table{border-collapse:collapse;width:100%;margin-top:8px;font-size:11.5px}
+details.more td,details.more th{border-top:1px solid var(--line);padding:5px 6px;text-align:left;vertical-align:top}
+details.more a{color:#9cdcf1}
+.mono{font-family:var(--mono);font-size:11px}
+footer{margin-top:10px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media (max-width:999px){
+ #cv{height:clamp(440px,64vh,640px)}
+ .hud{position:static;width:auto;overflow:visible;padding:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));background:#02060b}
+ .steps{max-width:calc(100% - 24px)}
+ .cap{position:static;max-width:none;min-width:0;margin:0 10px 10px;border-radius:11px}
+ .dock{position:static;justify-content:flex-end;margin:0 10px 10px}
+}
+@media (max-width:560px){.app{padding:10px 8px 18px}h1{font-size:21px}.bigs .num{font-size:34px}.bigs .num.eu{font-size:28px}.chip i{display:none}.chip{padding:5px 9px;font-size:11px}.cap .hint{font-size:10.5px}.steps{flex-wrap:nowrap;overflow-x:auto;max-width:calc(100% - 16px);scrollbar-width:none;left:8px;top:8px}.steps::-webkit-scrollbar{display:none}.sub{font-size:12.5px}}
 </style>
 </head>
 <body>
 <div class="app">
 <header>
-  <div><div class="brand">SROAI</div><h1>Middle-Power Strategic Autonomy Lab</h1>
-  <div class="rfp">RECOGNIZE THE STAKES · BUILD LEVERAGE · USE LEVERAGE WELL · COALITIONS &amp; COORDINATION</div></div>
-  <div class="sub">France worked case. A deliberately simple animated stress test: one upstream event fans through the network, exactly where a middle power can lose access, gain leverage, or stop the cascade.</div>
+ <div>
+  <div class="brand">SROAI · FRANCE WORKED CASE</div>
+  <h1>Middle-Power Strategic Autonomy Lab</h1>
+  <div class="pillars">RECOGNIZE THE STAKES · BUILD LEVERAGE · USE LEVERAGE WELL · COALITIONS &amp; COORDINATION</div>
+ </div>
+ <div class="sub">France's critical AI as a living network. Restrict access to a US supplier and watch the loss fan out through French institutions; build French capacity, spend the leverage it buys, and bring in partners, and watch the same loss come down step by step. Every percentage is computed live from the model and its sourced register; euro figures are illustrative.</div>
 </header>
-<div class="layout">
-  <main class="stage">
-    <div class="field">
-      <canvas id="net" role="img" aria-label="Animated fan-out of AI dependency shocks and middle-power responses"></canvas>
-      <div class="overlay"><div id="scenarioBadge" class="badge red">SYSTEMIC EVENT · ONE LAB</div><div id="phaseBadge" class="badge">PLAYING · UPSTREAM EVENT</div></div>
-      <div class="caption" id="caption"></div>
-    </div>
-    <div class="legend">
-      <span><i style="background:var(--cyan)"></i>frontier / upstream provider</span>
-      <span><i style="background:var(--green)"></i>middle-power capacity / substitute</span>
-      <span><i style="background:var(--red)"></i>access lost / service interrupted</span>
-      <span><i style="background:var(--gold)"></i>leverage / negotiated condition</span>
-      <span><i style="background:var(--violet)"></i>coalition support</span>
-    </div>
-    <div class="metrics">
-      <div class="metric"><div class="k">What happens</div><div class="v" id="mImpact">Limited</div><div class="s" id="mImpactS">one branch loses access</div></div>
-      <div class="metric"><div class="k">Can France switch?</div><div class="v" id="mSwitch">Yes</div><div class="s" id="mSwitchS">domestic / alternative capacity exists</div></div>
-      <div class="metric"><div class="k">Systemic result</div><div class="v" id="mCascade">Contained</div><div class="s" id="mCascadeS">the disruption dies out</div></div>
-    </div>
-  </main>
-
-  <aside class="side">
-    <section class="card">
-      <h2>1 · RECOGNIZE THE STAKES</h2>
-      <div class="body">
-        <div class="step">Choose the systemic event</div>
-        <button class="scenario" data-s="oneLab" aria-pressed="true"><b>One-lab access loss</b><span>One dominant frontier lab stops serving France. Watch substitutes absorb the shock.</span><span class="tag">SYSTEMIC EVENT</span></button>
-        <button class="scenario" data-s="threeLabs" aria-pressed="false"><b>Three-lab lockout</b><span>OpenAI, Anthropic and Google access disappear together. The fan-out becomes visible.</span><span class="tag">LOCKOUT</span></button>
-        <button class="scenario" data-s="nvidia" aria-pressed="false"><b>Shared accelerator lockout</b><span>NVIDIA access is lost. Two apparently sovereign French paths fail together because they share the same substrate.</span><span class="tag">COMMON DEPENDENCY</span></button>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>2 · BUILD LEVERAGE</h2>
-      <div class="body"><button class="scenario" data-s="leverage" aria-pressed="false"><b>Make France costly to exclude</b><span>Grow Mistral / French compute until foreign companies depend on it. The fan-out reverses.</span><span class="tag">BUILD LEVERAGE</span></button></div>
-    </section>
-
-    <section class="card">
-      <h2>3 · USE LEVERAGE WELL</h2>
-      <div class="body"><button class="scenario" data-s="deal" aria-pressed="false"><b>Compute-for-access deal</b><span>France trades scarce hosting capacity for reliable model access, advance notice and evaluation access.</span><span class="tag">RELIABLE ACCESS + SAFETY</span></button></div>
-    </section>
-
-    <section class="card">
-      <h2>4 · COALITIONS &amp; COORDINATION</h2>
-      <div class="body"><button class="scenario" data-s="coalition" aria-pressed="false"><b>France + Germany + Canada</b><span>Partner capacity enters only where France cannot substitute alone. Watch the red branches turn back on.</span><span class="tag">JOINT DEAL</span></button></div>
-    </section>
-
-    <section class="card"><h2>PLAYBACK</h2><div class="body"><div class="player"><button id="play" class="btn primary">Pause</button><button id="restart" class="btn">Restart</button><button id="speed" class="btn">Speed 1×</button></div></div></section>
-
-    <section class="card"><h2>WHAT THIS IS</h2><div class="body details">
-      <div class="note">This prototype does not forecast the probability of a lockout. It shows how a specified event propagates through a dependency structure and where leverage or substitutes stop it.</div>
-      <details><summary>Evidence &amp; assumptions</summary>
-        <p>France is the worked case. Structural examples use public relationships; the widths and recovery shares shown here are illustrative scenario settings for demonstration.</p>
-        <p>Primary references include the <a href="https://middlepowers.ai/" target="_blank" rel="noopener">Middle Powers RFP</a>, <a href="https://mistral.ai/news/regional-inference-open-models-new-compute/" target="_blank" rel="noopener">Mistral sovereign-compute announcements</a>, and the <a href="https://news.microsoft.com/source/2026/07/21/microsoft-and-mistral-expand-strategic-partnership-to-give-enterprises-and-regulated-industries-frontier-ai-they-can-control" target="_blank" rel="noopener">Microsoft–Mistral partnership</a>.</p>
-      </details>
-      <details><summary>Technical method</summary><p class="method">SROAI separates the size of exposed activity from whether disruption attenuates or amplifies as it moves downstream. In the full method, propagation depends on exposure, within-window non-recoverability and fan-out. The visual intentionally translates those quantities into plain-language outcomes.</p></details>
-    </div></section>
-  </aside>
+<div class="stage" id="stage">
+ <canvas id="cv" aria-label="Interactive 3D network of France's AI dependencies. Click US suppliers to restrict access, partners to bring them in, and press and hold Mistral Compute to build leverage."></canvas>
+ <div class="steps" id="steps">
+  <button class="chip tour" data-b="tour">▶ Watch the tour</button>
+  <button class="chip" data-b="1"><span class="n">1</span>Recognize the stakes <i>anticipate</i></button>
+  <button class="chip" data-b="2"><span class="n">2</span>Build leverage <i>node-boost</i></button>
+  <button class="chip" data-b="3"><span class="n">3</span>Use leverage well <i>resilience</i></button>
+  <button class="chip" data-b="4"><span class="n">4</span>Coalitions <i>triage</i></button>
+ </div>
+ <div class="cap"><div id="cap"></div><span class="hint"><b>Click</b> a US supplier to restrict access · <b>click</b> a partner to bring it in · <b>press and hold</b> Mistral Compute to build leverage · <b>drag</b> to turn</span></div>
+ <div class="dock" id="dock">
+  <button class="chip" id="dur" title="How long the restriction lasts">⏱ lasts 30 days</button>
+  <button class="chip" id="reset">↺ Reset</button>
+ </div>
+ <div class="hud" id="hud">
+  <div class="card">
+   <div class="kk">If access is restricted · projected</div>
+   <div class="ev" id="hEv">Normal service</div>
+   <div class="bigs">
+    <div><div class="num" id="hL">0%</div><div class="lbl">of France's critical AI capability down</div></div>
+    <div><div class="num eu" id="hE">€0</div><div class="lbl" id="hEs">illustrative loss</div></div>
+   </div>
+   <div class="small" id="hLs">—</div>
+   <div class="row3">
+    <div class="m"><div class="v" id="hK">—</div><div class="l" id="hKs">systemic event?</div></div>
+    <div class="m"><div class="v" id="hD">0</div><div class="l">days of total blackout, equivalent</div></div>
+    <div class="m"><div class="v" id="hR">—</div><div class="l" id="hRs">days until substitutes take over</div></div>
+   </div>
+   <div class="nosub" id="hNo"></div>
+  </div>
+  <div class="card" id="cWf">
+   <div class="kk">The four steps on this restriction</div>
+   <div id="wf"></div>
+  </div>
+  <div class="card" id="cLev">
+   <div class="kk" style="color:#e9c46a">Leverage</div>
+   <div class="sub2"><b>Build</b> <i>node-boost</i> · others' stake in French capacity</div>
+   <div class="levrow"><span class="num2 au" id="lE">€0</span><span class="lbl" id="lEs">a month foreign users would lose if France were excluded</span></div>
+   <div class="bar" id="lBar"><i id="lFill"></i><b style="left:33.3%"></b></div>
+   <div class="small" id="lS">—</div>
+   <div class="sub2" style="margin-top:7px"><b>Use</b> <i>resilience</i> · what France asks for in return</div>
+   <div class="terms" id="terms"></div>
+   <div id="nashBox"></div>
+  </div>
+  <div class="card" id="cCoal">
+   <div class="kk" style="color:#c9b8ff">Coalitions &amp; coordination <i style="text-transform:none;font-style:italic;letter-spacing:0">triage</i></div>
+   <div class="small" id="cS" style="color:#d9cff7;font-size:12px">Click a partner above the network to bring it in.</div>
+   <button class="cbtn" id="best">★ Find the smallest useful coalition</button>
+  </div>
+ </div>
+ <div class="tip" id="tip"></div>
 </div>
-<div class="footer"><span>Prototype · conditional scenarios, not event probabilities</span><span>M. Antony Ewing · Conquer Risk / CMH Scientific</span></div>
+<details class="more" id="more">
+ <summary>How the numbers are computed, and the sources</summary>
+ <div id="method"></div>
+</details>
+<footer><span id="foot">Conditional severities, not probabilities.</span><span>M. Antony Ewing, PhD · Conquer Risk / CMH Scientific</span></footer>
 </div>
 <script>
-(()=>{
 "use strict";
-const $=id=>document.getElementById(id), cv=$("net"), ctx=cv.getContext("2d");
-let W=1000,H=620,DPR=1,last=performance.now(),clock=0,playing=true,speed=1,active="oneLab";
-const C={bg:"#010407",cyan:"#64c7e8",green:"#43edaa",red:"#ff5b7f",gold:"#ffc857",violet:"#b9a2ff",dim:"#5f7885",text:"#e8f4f6",line:"#203441"};
-const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
-function rng(seed){let x=seed>>>0;return()=>((x=(1664525*x+1013904223)>>>0)/4294967296)}
-const rnd=rng(20261014);
-
-const BASE={
- labs:[{id:"openai",n:"OpenAI",x:.10,y:.23},{id:"anthropic",n:"Anthropic",x:.10,y:.47},{id:"google",n:"Google",x:.10,y:.71}],
- nvidia:{id:"nvidia",n:"NVIDIA",x:.10,y:.47},
- france:{id:"france",n:"FRANCE · AI ACCESS",x:.39,y:.45},
- mistral:{id:"mistral",n:"Mistral",x:.37,y:.24},
- fcloud:{id:"fcloud",n:"French sovereign cloud",x:.37,y:.70},
- sectors:[
-  {id:"def",n:"Defense",x:.69,y:.14},{id:"health",n:"Health",x:.73,y:.27},{id:"cyber",n:"Cyber",x:.70,y:.40},
-  {id:"finance",n:"Finance",x:.75,y:.53},{id:"industry",n:"Industry",x:.70,y:.66},{id:"public",n:"Public administration",x:.74,y:.79},{id:"research",n:"Research",x:.68,y:.90}
- ],
- foreign:[{id:"msft",n:"Microsoft",x:.70,y:.22},{id:"eu",n:"European users",x:.75,y:.44},{id:"industry2",n:"Foreign industry",x:.71,y:.70}],
- coalition:[{id:"germany",n:"Germany",x:.16,y:.27},{id:"canada",n:"Canada",x:.16,y:.68}]
+const TODAY="2026-10-14";
+const DEMO_URL="maewingphd.github.io/sroai-middle-powers-demo";
+const S_={
+  june2026:{t:"Anthropic statement on Fable 5 and Mythos 5 access",u:"https://www.anthropic.com/news/fable-mythos-access",d:"2026-07-01",st:"doc",use:"Realized event: 12 Jun to 1 Jul 2026",n:"Access to both models suspended on 12 June 2026 to comply with US Commerce Department export controls; controls lifted 30 June; access restored 1 July."},
+  june2026detail:{t:"How the June 2026 suspension unfolded",u:"https://www.implicator.ai/the-anthropic-shutdown-confirmed-europes-fear-of-depending-on-us-tech/",d:"2026-06-14",st:"doc",sec:true,use:"Notice T = 0",n:"The directive arrived late in the US afternoon and both models were disabled worldwide that evening, with no advance notice to customers."},
+  euReact:{t:"EU and French reaction to the export directive",u:"https://www.bankinfosecurity.net/us-anthropic-export-controls-sparks-sharp-eu-reaction-a-31972",d:"2026-06-15",st:"ctx",sec:true,use:"Context",n:"ENISA consulted the Commission and member states; French minister for European affairs Benjamin Haddad responded publicly."},
+  mcompute:{t:"Mistral Compute",u:"https://mistral.ai/products/compute",d:"2026-10-14",st:"doc",use:"NVIDIA → Mistral Compute",n:"Lists NVIDIA GB200, GB300 and B300 GPUs; states 200 MW across the EU by 2027."},
+  msMistral2026:{t:"Microsoft and Mistral expand strategic partnership, 21 Jul 2026",u:"https://news.microsoft.com/source/2026/07/21/microsoft-and-mistral-expand-strategic-partnership-to-give-enterprises-and-regulated-industries-frontier-ai-they-can-control/",d:"2026-07-21",st:"doc",use:"Mistral Compute → Microsoft; Mistral models → Foundry",n:"Microsoft will use Mistral's expanded Europe-based GPU infrastructure under a multibillion-dollar commitment; Mistral models are offered in Microsoft Foundry and Copilot Studio."},
+  msMistral2024:{t:"Microsoft–Mistral partnership, Feb 2024",u:"https://siliconangle.com/2024/02/26/now-microsoft-partner-mistral-ai-challenges-openai-three-new-llms/",d:"2024-02-26",st:"doc",sec:true,use:"US cloud → Mistral models (historical, small)",n:"Mistral gained access to Azure supercomputing to train and serve models. Current use is not disclosed, so the edge is kept small."},
+  defense:{t:"Armed Forces ministry framework agreement with Mistral AI, 9 Jan 2026",u:"https://www.defense.gouv.fr/sites/default/files/ministere-armees/Communiqu%C3%A9_A_le%20minist%C3%A8re%20des%20Arm%C3%A9es%20et%20des%20Anciens%20combattants%20notifie%20un%20accord-cadre%20%C3%A0%20Mistral%20AI%20pour%20renforcer%20la%20souverainet%C3%A9%20technologique%20de%20la%20d%C3%A9fense.pdf",d:"2026-01-09",st:"doc",use:"Mistral models → Armed Forces ministry",n:"Covers the armed forces, the ministry's directorates and services, and strategic public bodies (CEA, ONERA, SHOM)."},
+  mef:{t:"Economic ministries' AI assistant experiment",u:"https://www.economie.gouv.fr/mission-innovation/lancement-de-lexperimentation-de-lassistant-ia",d:"2025-12-15",st:"doc",use:"Mistral models → economic ministries",n:"2,500 staff planned through June 2026; the ministry's June results report just over 1,000 took part. The assistant runs on Mistral AI models.",u2:"https://www.banquedesterritoires.fr/10000-agents-de-letat-vont-tester-lia-de-mistral-dans-un-cadre-securise",t2:"Mistral named (Banque des Territoires)"},
+  bnp:{t:"BNP Paribas–Mistral AI renewal, 26 May 2026",u:"https://group.bnpparibas/en/press-release/bnp-paribas-and-mistral-ai-extend-their-partnership-to-support-the-next-phase-of-generative-ai-deployment-within-the-group",d:"2026-05-26",st:"doc",use:"Mistral models → BNP Paribas",n:"Three-year renewal covering software, solutions and co-development research."},
+  orangeM:{t:"Orange customer case (Mistral)",u:"https://mistral.ai/customers/orange/",d:"2026-10-14",st:"doc",use:"Mistral models → Orange",n:"Mistral models generate personalized promotional messages. Orange's 298M customers are company reach, not AI exposure."},
+  orangeOss:{t:"Orange runs OpenAI open-weight models on its own infrastructure, 8 Aug 2025",u:"https://privacy.getcoai.com/news/orange-deploys-openais-open-weight-models-across-26-countries-with-full-data-control",d:"2025-08-08",st:"doc",sec:true,use:"Open-weight models → Orange",n:"gpt-oss-120b and gpt-oss-20b run inside Orange's own infrastructure across 26 countries. Weights already held are untouched by an API withdrawal."},
+  hdhAzure:{t:"Health Data Hub (now PDS) begins migration off Microsoft Azure",u:"https://www.banquedesterritoires.fr/la-plateforme-des-donnees-de-sante-choisi-son-hebergement-souverain",d:"2026-04-24",st:"doc",use:"US cloud → Health Data Hub (current)",n:"Currently hosted on Microsoft Azure; the new platform is due between late 2026 and early 2027."},
+  hdhScw:{t:"Scaleway designated future host of the Health Data Hub, 23 Apr 2026",u:"https://www.scaleway.com/en/news/scaleway-selected-to-support-frances-health-data-hub-in-its-transition-to-a-sovereign-cloud/",d:"2026-04-23",st:"doc",use:"Scaleway → Health Data Hub (after migration)",n:"Includes a copy of the main SNDS database. No migration date in the release."},
+  airbus:{t:"Airbus selects Scaleway for selected workloads, 16 Jul 2026",u:"https://www.scaleway.com/en/news/scaleway-secures-european-trusted-cloud-services-contract-with-airbus/",d:"2026-07-16",st:"doc",use:"Scaleway → Airbus (from Oct 2026 register)",n:"Selected enterprise applications needing the highest levels of governance, resilience and legal protection."},
+  scwGpu:{t:"Scaleway buys 1,000 NVIDIA H100 GPUs",u:"https://www.datacenterdynamics.com/en/news/scaleway-expands-to-52-countries-buys-1000-nvidia-h100-gpus",d:"",st:"doc",sec:true,use:"NVIDIA → Scaleway",n:"Scaleway's AI cloud runs on NVIDIA GPUs."},
+  axa:{t:"AXA Secure GPT on Microsoft's Azure OpenAI Service, 27 Jul 2023",u:"https://www.axa.com/en/press/press-releases/axa-offers-securegenerative-ai-to-employees",d:"2023-07-27",st:"doc",use:"US frontier APIs and US cloud → AXA",n:"First 1,000 employees, target all 140,000. Current architecture not re-verified."},
+  sanofi:{t:"Sanofi–Formation Bio–OpenAI collaboration, 21 May 2024",u:"https://seekingalpha.com/news/4108671-sanofi-teams-up-with-formation-bio-and-openai-on-ai-driven-drug-development",d:"2024-05-21",st:"doc",sec:true,use:"US frontier APIs → Sanofi",n:"Data, software and tuned models for drug development."},
+  dinum:{t:"State plan to reduce extra-European digital dependencies (DINUM seminar, 8 Apr 2026)",u:"https://presse.economie.gouv.fr/souverainete-numerique-letat-accelere-la-reduction-de-ses-dependances-extra-europeennes/",d:"2026-04-08",st:"ctx",use:"Route to officials; state users avoid US APIs",n:"Each ministry formalizes its own plan by autumn 2026, covering AI, databases, virtualization, network equipment, workstations, collaboration tools and antivirus."},
+  observatory:{t:"Observatoire de la souveraineté numérique: company survey, 13 May 2026",u:"https://www.strategie-plan.gouv.fr/files/files/Actualites/2026-05-13%20-%20Observ%20souverainet%C3%A9%20num%C3%A9rique/CP_-_OSN_questionnaire_clean_CB__1__0.pdf",d:"2026-05-13",st:"ctx",use:"Route to officials",n:"Run by the Haut-commissariat à la Stratégie et au Plan; survey closed 12 Jun 2026; results due after summer 2026."},
+  cge:{t:"CGE report preparing a digital-sovereignty observatory, Jul 2025",u:"https://www.vie-publique.fr/files/rapport/pdf/301478.pdf",d:"2025-07-01",st:"ctx",use:"What officials asked for",n:"Calls for statistics, evaluation tools, offer catalogs, value-chain analysis and comparisons; firms do not want a public observatory performing audits."},
+  inesia:{t:"INESIA 2026–2027 roadmap, 12 Feb 2026",u:"https://www.entreprises.gouv.fr/espace-presse/linstitut-national-pour-levaluation-et-la-securite-de-lia-adopte-sa-feuille-de-route",d:"2026-02-12",st:"ctx",use:"Who would use the safety conditions",n:"Steered by DGE and SGDSN; a systemic-risks pole on the most advanced AI."},
+  francoGerman:{t:"26th Franco-German Council of Ministers, 17 Jul 2026",u:"https://www.elysee.fr/en/emmanuel-macron/2026/07/17/conclusion-of-the-26th-franco-german-ministerial-council",d:"2026-07-17",st:"ctx",use:"Coalition: Germany",n:"Closer cooperation on frontier AI; world-class compute; reduce dependence on non-European tech suppliers."},
+  macron:{t:"Macron at the UN General Assembly, 22 Sep 2026 (transcript)",u:"https://www.elysee.fr/front/pdf/elysee-module-27341-fr.pdf",d:"2026-09-22",st:"ctx",use:"Coalition candidates",n:"Proposed an open-source frontier model built by pooling compute and investment; named Europeans, Canadians, Brazilians, Indians, Indonesians, Africans, Gulf states and Singapore."},
+  germany:{t:"Deutsche Telekom Industrial AI Cloud, 4 Feb 2026",u:"https://www.telekom.com/en/newsroom/latest-updates/media-information/2026/2/germany-s-first-ai-factory-for-industry",d:"2026-02-04",st:"doc",use:"Partner: non-US cloud and capacity (NVIDIA)",n:"Nearly 10,000 NVIDIA Blackwell GPUs, up to 0.5 exaFLOPS; a Deutschland stack with SAP and Siemens."},
+  cohere:{t:"Cohere agreements with the Canadian and UK governments, Jun 2025",u:"https://betakit.com/cohere-bringing-ai-into-public-sector-through-partnerships-with-canadian-uk-governments/",d:"2025-06-15",st:"doc",sec:true,use:"Partner: non-US frontier models",n:"Canada's best-funded LLM developer; MoU with the federal government, including work with the Canadian AI Safety Institute."},
+  canada:{t:"Canadian Sovereign AI Compute Strategy",u:"https://ised-isde.canada.ca/site/ised/en/canadian-sovereign-ai-compute-strategy",d:"2026-10-14",st:"ctx",use:"Partner context",n:"Up to C$1B for public supercomputing infrastructure, part of the C$2B strategy from Budget 2024."},
+  furiosa:{t:"FuriosaAI deploys RNGD inference servers in Lisbon, 7 Jul 2026",u:"https://thenextweb.com/news/furiosaai-rngd-europe-equinix-lisbon",d:"2026-07-07",st:"doc",sec:true,use:"Partner: the only non-NVIDIA accelerator mapped",n:"Korean inference accelerator made on TSMC's process with SK hynix memory; smaller and slower than NVIDIA's cards."},
+  hbm:{t:"SK hynix sold out of HBM; over half of global HBM (TrendForce), 30 Oct 2025",u:"https://www.notebookcheck.net/SK-hynix-sells-out-its-DRAM-NAND-and-HBM-chip-supply-to-Nvidia-through-2026.1151402.0.html",d:"2025-10-30",st:"ctx",sec:true,use:"Partner leverage: Korea",n:"TrendForce estimates SK hynix holds over half of HBM supply; Samsung and Micron about a quarter each."},
+  korea:{t:"Korea picks Naver Cloud consortium for a sovereign cybersecurity AI model, 3 Sep 2026",u:"https://en.yna.co.kr/view/AEN20260903002351320",d:"2026-09-03",st:"ctx",sec:true,use:"Partner context",n:"The science ministry chose the Naver Cloud-led group over an SK Telecom-led rival."},
+  uk:{t:"UK AI Research Resource (AIRR)",u:"https://www.gov.uk/government/publications/expression-of-interest-airr-heterogeneous-supercomputer-host-site-selection/expression-of-interest-airr-heterogeneous-supercomputer-host-site-selection",d:"2026-10-14",st:"ctx",use:"Partner context",n:"Isambard-AI, Dawn and further capacity: research capacity, not a commercial substitute."},
+  japan:{t:"Fujitsu Made-in-Japan sovereign AI servers, 12 Feb 2026",u:"https://global.fujitsu/en-global/pr/news/2026/02/12-01",d:"2026-02-12",st:"ctx",use:"Partner context",n:"Production from March 2026 on NVIDIA HGX B300 and RTX PRO 6000: domestic assembly on the same accelerator trigger."},
+  india:{t:"IndiaAI: 20 foundation-model proposals selected; compute system ordered, Aug 2026",u:"https://www.pib.gov.in/PressReleasePage.aspx?PRID=2298788&reg=48&lang=1",d:"2026-08-13",st:"ctx",use:"Partner context",n:"20 of 506 proposals selected; a ~1.1 exaFLOPS AI compute system ordered, not delivered."},
+  uae:{t:"Abu Dhabi government rolls out Microsoft 365 Copilot, 6 Jul 2026",u:"https://www.dge.gov.ae/en/news/2026-adg-microsoft",d:"2026-07-06",st:"ctx",use:"Partner: capacity on a US stack",n:"35,000 licenses across 27 entities with processing inside the UAE, on a Microsoft and Core42 environment."},
+  asml:{t:"Middle Powers RFP on ASML's leverage",u:"https://middlepowers.ai/",d:"2026-10-10",st:"ctx",use:"Partner leverage: Netherlands",n:"The RFP cites Dylan Rogers' evaluation of how little leverage ASML has so far bought the Netherlands."},
+  dora:{t:"EU supervisors designate critical ICT third-party providers under DORA, 18 Nov 2025",u:"https://www.eiopa.europa.eu/european-supervisory-authorities-designate-critical-ict-third-party-providers-under-digital-2025-11-18_fr",d:"2025-11-18",st:"ctx",use:"Supervisory precedent",n:"Nineteen providers including AWS, Google Cloud, Microsoft, Oracle, SAP and Deutsche Telekom, chosen on systemic relevance, substitutability and concentration risk."}
 };
-const leaves=[]; for(const s of BASE.sectors){for(let i=0;i<12;i++){const a=(rnd()-.5)*1.7, rr=.075+.065*rnd();leaves.push({sector:s.id,x:clamp(s.x+rr*Math.cos(a),.77,.97),y:clamp(s.y+rr*Math.sin(a),.06,.95),r:1.1+1.6*rnd(),ph:rnd()*6.28})}}
 
-const SC={
- oneLab:{badge:"SYSTEMIC EVENT · ONE LAB",badgeClass:"red",title:"One frontier lab goes dark. The shock reaches France, but alternative frontier access and Mistral keep most branches alive.",small:"The policy question is simple: does the event die out, or does it continue through critical services?",impact:"Limited",impactS:"one part of frontier access is lost",sw:"Yes",swS:"other labs + Mistral absorb the shock",cascade:"Contained",cascadeS:"the fan-out fades before the periphery",kind:"labs",lost:["anthropic"],sectorLoss:["cyber"],duration:8},
- threeLabs:{badge:"LOCKOUT · THREE FRONTIER LABS",badgeClass:"red",title:"All three globally dominant lab routes disappear together. Domestic capacity helps, but it cannot replace the full frontier-access layer inside the window.",small:"This is the sovereignty problem in the RFP: reliable access becomes a precondition for a functioning economy and security apparatus.",impact:"Broad",impactS:"most frontier-dependent branches are hit",sw:"Partly",swS:"Mistral carries only part of the load",cascade:"Amplifying",cascadeS:"the interruption reaches the periphery",kind:"labs",lost:["openai","anthropic","google"],sectorLoss:["def","health","cyber","finance","industry","public"],duration:8},
- nvidia:{badge:"COMMON DEPENDENCY · NVIDIA",badgeClass:"red",title:"The upstream node is no longer a model lab. NVIDIA is removed and two French routes that looked separate fail together because both sit on the same accelerator substrate.",small:"Two sovereign providers are not two independent fallbacks when the same upstream trigger disables both.",impact:"Common-mode",impactS:"Mistral + French cloud are hit together",sw:"No",swS:"the shared substrate removes both paths",cascade:"Amplifying",cascadeS:"diversification collapses to one trigger",kind:"nvidia",lost:["nvidia"],sectorLoss:["def","health","cyber","finance","industry"],duration:8},
- leverage:{badge:"BUILD LEVERAGE · FRANCE",badgeClass:"gold",title:"Now the fan-out reverses. As foreign workloads depend on Mistral models and French compute, France moves onto other parties’ critical paths.",small:"Leverage is not a slogan here: it is the growing cost to others of excluding the French node.",impact:"Leverage rises",impactS:"foreign activity now depends on France",sw:"Not the point",swS:"the direction of dependence has reversed",cascade:"Outward",cascadeS:"France becomes costly to exclude",kind:"leverage",lost:[],sectorLoss:[],duration:8},
- deal:{badge:"USE LEVERAGE WELL · COMPUTE-FOR-ACCESS",badgeClass:"gold",title:"France uses hosting leverage to secure reliable frontier access, advance notice and evaluation access. When a provider changes terms, the notice window gives critical services time to switch.",small:"The same leverage that keeps France relevant is spent on the safety and access outcomes named in the RFP.",impact:"Reduced",impactS:"the lockout reaches fewer critical branches",sw:"Yes",swS:"advance notice opens a switching window",cascade:"Stopped early",cascadeS:"conditions prevent the full fan-out",kind:"deal",lost:["anthropic"],sectorLoss:["cyber"],duration:8},
- coalition:{badge:"COALITIONS & COORDINATION",badgeClass:"green",title:"France cannot replace every missing input alone. Germany and Canada supply complementary capacity only where France has a gap, restoring critical branches without pretending every partner can substitute for everything.",small:"The coalition is valuable because the capacities are complementary, not because more flags were added to the screen.",impact:"Shared",impactS:"partners cover specific missing routes",sw:"Yes, jointly",swS:"coalition support restores key branches",cascade:"Contained",cascadeS:"joint capacity stops the lockout",kind:"coalition",lost:["openai","anthropic","google"],sectorLoss:["def","health"],duration:8}
+/* ---------- triggers and events ---------- */
+const TRIG={LAB:"one US lab's top models",USAPI:"US frontier-model APIs",USCLOUD:"US hyperscale cloud",ACCEL:"US-origin accelerators (all non-US buyers)",ACCEL_FR:"US-origin accelerators (France only)"};
+const EVENTS={
+  none:{label:"No event: normal service",short:"normal service",trig:C=>[],W:30,note:"Service flows from US substrates through French anchors to French institutions."},
+  lab:{label:"One US lab withdraws its top models (realized, 12 Jun to 1 Jul 2026)",short:"single-lab withdrawal (realized)",trig:C=>["LAB"],W:19,note:"Realized: about 19 days, zero notice."},
+  usapi:{label:"All US frontier-model APIs withdrawn",short:"all US frontier APIs withdrawn",trig:C=>["USAPI"],W:90,note:"Counterfactual extension of the June 2026 event to every US lab, for a quarter."},
+  cloud:{label:"US hyperscale-cloud lockout",short:"US cloud lockout",trig:C=>["USCLOUD"],W:90,note:"Azure, AWS and Google Cloud unavailable to French users for a quarter."},
+  accel:{label:"US accelerator export restriction",short:"accelerator restriction",trig:C=>[C.scope==="fr"?"ACCEL_FR":"ACCEL"],W:180,note:"Installed GPUs keep running; λA is the planned capacity that never arrives."},
+  combined:{label:"Combined lockout (models, cloud and accelerators)",short:"combined lockout",trig:C=>["USAPI","USCLOUD",C.scope==="fr"?"ACCEL_FR":"ACCEL"],W:90,note:"Every trigger above at once, for a quarter. Never milder than any single event at the same window."}
 };
+const STRESS=["lab","usapi","cloud","accel","combined"];
 
-function size(){const r=cv.getBoundingClientRect();W=Math.max(600,Math.round(r.width));H=Math.max(420,Math.round(r.height));DPR=Math.min(window.devicePixelRatio||1,2);cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0)}
-new ResizeObserver(size).observe(cv); size();
-function P(n){return{x:n.x*W,y:n.y*H}}
-function glow(x,y,r,col,a=1){const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,rgba(col,.75*a));g.addColorStop(.28,rgba(col,.34*a));g.addColorStop(1,rgba(col,0));ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill()}
-function rgba(hex,a){const v=parseInt(hex.slice(1),16);return`rgba(${v>>16},${(v>>8)&255},${v&255},${a})`}
-function bez(a,b,bend=0){const A=P(a),B=P(b),mx=(A.x+B.x)/2,my=(A.y+B.y)/2+bend*H;return{A,B,c1:{x:mx,y:A.y+bend*H*.25},c2:{x:mx,y:B.y+bend*H*.25}}}
-function pt(cur,t){const u=1-t;return{x:u*u*u*cur.A.x+3*u*u*t*cur.c1.x+3*u*t*t*cur.c2.x+t*t*t*cur.B.x,y:u*u*u*cur.A.y+3*u*u*t*cur.c1.y+3*u*t*t*cur.c2.y+t*t*t*cur.B.y}}
-function edge(a,b,col,alpha=.28,width=1,bend=0,pulse=null){const q=bez(a,b,bend);ctx.strokeStyle=rgba(col,alpha);ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(q.A.x,q.A.y);ctx.bezierCurveTo(q.c1.x,q.c1.y,q.c2.x,q.c2.y,q.B.x,q.B.y);ctx.stroke();if(pulse!=null&&pulse>0&&pulse<1){const z=pt(q,pulse);glow(z.x,z.y,10,col,.95);ctx.fillStyle=rgba(col,.95);ctx.beginPath();ctx.arc(z.x,z.y,2.3,0,6.283);ctx.fill()}}
-function node(n,col,active=1,ring=false){const p=P(n),r=(n.id==="france"?9:7);if(active>0)glow(p.x,p.y,r*(3.0+active),col,.25+.6*active);ctx.fillStyle=rgba(col,.45+.5*active);ctx.beginPath();ctx.arc(p.x,p.y,r,0,6.283);ctx.fill();if(ring){ctx.strokeStyle=rgba(C.gold,.85);ctx.lineWidth=2;ctx.beginPath();ctx.arc(p.x,p.y,r+7+3*Math.sin(clock*3),0,6.283);ctx.stroke()}ctx.font=`600 ${n.id==="france"?12:11}px ${getComputedStyle(document.body).fontFamily}`;ctx.fillStyle="#cfe0e6";ctx.textBaseline="middle";ctx.fillText(n.n,p.x+r+8,p.y)}
-function sector(s,state){const col=state==="loss"?C.red:state==="support"?C.violet:state==="gain"?C.green:C.dim;node(s,col,state==="neutral"?.25:.9)}
-function bg(){ctx.clearRect(0,0,W,H);ctx.fillStyle=C.bg;ctx.fillRect(0,0,W,H);const g=ctx.createRadialGradient(W*.48,H*.45,0,W*.48,H*.45,W*.65);g.addColorStop(0,"rgba(20,48,60,.20)");g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H)}
-function pulse(t0,t1){return clamp((clock-t0)/(t1-t0),0,1)}
-function drawLeaves(lossSet,supportSet){for(const l of leaves){const s=BASE.sectors.find(x=>x.id===l.sector),state=lossSet.has(s.id)?"loss":supportSet.has(s.id)?"support":"gain",col=state==="loss"?C.red:state==="support"?C.violet:C.green;const hub=P(s);ctx.strokeStyle=rgba(col,.055);ctx.lineWidth=.55;ctx.beginPath();ctx.moveTo(hub.x,hub.y);ctx.quadraticCurveTo((hub.x+l.x*W)/2,(hub.y+l.y*H)/2+7*Math.sin(l.ph),l.x*W,l.y*H);ctx.stroke();const a=.18+.45*(.5+.5*Math.sin(clock*1.8+l.ph));glow(l.x*W,l.y*H,l.r*4,col,a*.35);ctx.fillStyle=rgba(col,.33+a*.25);ctx.fillRect(l.x*W-1,l.y*H-1,2,2)}}
-function drawLabsScenario(sc){const lp=pulse(.4,2.6),fp=pulse(2.1,4.6),pp=pulse(4.0,7.0),lost=new Set(sc.lost),sl=new Set(sc.sectorLoss),support=new Set();
-  BASE.labs.forEach((l,i)=>{const bad=lost.has(l.id);node(l,bad?C.red:C.cyan,bad?.95:.55);edge(l,BASE.france,bad?C.red:C.cyan,bad?.40:.13,bad?1.4:.8,(i-1)*.03,bad?lp:null)});
-  node(BASE.mistral,C.green,.9);edge(BASE.mistral,BASE.france,C.green,.32,1.2,.03,fp);
-  node(BASE.france,sl.size>3?C.red:C.green,.85);
-  BASE.sectors.forEach((s,i)=>{const bad=sl.has(s.id);edge(BASE.france,s,bad?C.red:C.green,bad?.33:.13,bad?1.3:.8,(i-3)*.004,bad?fp:pp);sector(s,bad?"loss":"gain")});drawLeaves(sl,support);
+/* ---------- graph ---------- */
+const NODES=[
+  {id:"lab",n:"US lab A (top models)",tier:"ext",x:.04,y:.07,trig:["LAB","USAPI"]},
+  {id:"usapi",n:"Other US frontier APIs",tier:"ext",x:.04,y:.25,trig:["USAPI"]},
+  {id:"cloud",n:"US hyperscale cloud",tier:"ext",x:.04,y:.45,trig:["USCLOUD"]},
+  {id:"gpu",n:"NVIDIA accelerators",tier:"ext",x:.04,y:.65,trig:["ACCEL","ACCEL_FR"]},
+  {id:"ow",n:"Open-weight models, FR infra",tier:"anchor",x:.28,y:.10,w:.10},
+  {id:"m",n:"Mistral models",tier:"anchor",x:.28,y:.31,w:.25},
+  {id:"mc",n:"Mistral Compute",tier:"anchor",x:.28,y:.52,w:.15},
+  {id:"sw",n:"Scaleway",tier:"anchor",x:.28,y:.70,w:.15},
+  {id:"conv",n:"Unnamed users of US APIs",tier:"dep",x:.555,y:.045,w:1.0,scen:true},
+  {id:"sanofi",n:"Sanofi",tier:"dep",x:.555,y:.138,w:.5},
+  {id:"axa",n:"AXA Secure GPT",tier:"dep",x:.555,y:.231,w:.6},
+  {id:"orange",n:"Orange",tier:"dep",x:.555,y:.324,w:.8},
+  {id:"bnp",n:"BNP Paribas",tier:"dep",x:.555,y:.417,w:.8},
+  {id:"mef",n:"Economic ministries",tier:"dep",x:.555,y:.510,w:.4},
+  {id:"def",n:"Armed Forces ministry",tier:"dep",x:.555,y:.603,w:.9},
+  {id:"hdh",n:"Health Data Hub (PDS)",tier:"dep",x:.555,y:.696,w:.7},
+  {id:"airbus",n:"Airbus selected workloads",tier:"dep",x:.555,y:.789,w:.5},
+  {id:"msft",n:"Microsoft (EU GPUs)",tier:"foreign",x:.30,y:.905,w:.8},
+  {id:"foundry",n:"Foundry customers",tier:"foreign",x:.45,y:.905,w:.4},
+  {id:"flab",n:"Foreign lab on FR compute",tier:"foreign",x:.60,y:.905,w:.8,scen:true},
+  {id:"euadm",n:"EU administrations",tier:"foreign",x:.75,y:.905,w:.5,scen:true}
+];
+const N=Object.fromEntries(NODES.map(n=>[n.id,n]));
+const ORDER=["lab","usapi","cloud","gpu","ow","mc","sw","m","conv","sanofi","axa","orange","bnp","mef","def","hdh","airbus","msft","foundry","flab","euadm"];
+/* Completion parameters theta: the scenario numbers the register does not pin down (Nash Drift's unobserved directions). */
+const TH0={hdh:120,state:1,api:1,mistral:.85,de:1};
+const THETA=[
+  {k:"hdh",n:"Health Data Hub's remaining migration time to Scaleway",lv:[60,120,180],fmt:v=>v+" d"},
+  {k:"state",n:"State users' switch time to open-weight models",lv:[.5,1,1.5],fmt:v=>"×"+v},
+  {k:"api",n:"Enterprise switch time from US APIs to Mistral",lv:[.5,1,1.5],fmt:v=>"×"+v},
+  {k:"mistral",n:"Share of Mistral's models running on Mistral Compute",lv:[.5,.85],fmt:v=>String(v)},
+  {k:"de",n:"Switch time to German capacity",lv:[.5,1,2],fmt:v=>"×"+v}
+];
+function visible(id,C){ if(id==="conv") return C.unnamed; if(id==="flab") return !!C.flab; if(id==="euadm") return !!C.euadm;
+  if(id==="airbus"||id==="msft") return C.vintage!=="may26"; return !!N[id]; }
+/* Inputs: from, e (exposure share), st (evidence status), ev (source), alts (substitutes: to, tau days, cover share),
+   calt (which partner substitute kind can stand in). */
+function inputsOf(id,C){
+  const th=C.theta||TH0, ef=C.ef??.15, tf=C.tauf??30, cap=C.cap||0, gx=1-.35*cap; // v4: capacity installed before a restriction keeps running
+  switch(id){
+    case "ow": return [{from:"gpu",e:.9*gx,st:"inf",ev:"orangeOss",why:"accelerator vendor not disclosed; NVIDIA assumed",alts:[],calt:"compute"}];
+    case "mc": return [{from:"gpu",e:.95*gx,st:"doc",ev:"mcompute",alts:[],calt:"compute"}];
+    case "sw": return [{from:"gpu",e:.9*gx,st:"doc",ev:"scwGpu",alts:[],calt:"compute"}];
+    case "m": return [
+      {from:"mc",e:th.mistral,st:"inf",ev:"mcompute",why:"share of Mistral's own training and serving on Mistral Compute is not disclosed",alts:[{to:"cloud",tau:30,cover:.5}]},
+      {from:"cloud",e:.10,st:"doc",ev:"msMistral2024",why:"2024 relationship; current use not disclosed",alts:[{to:"mc",tau:30,cover:1}]}];
+    case "conv": return [
+      {from:"lab",e:.30,st:"scen",ev:null,alts:[{to:"usapi",tau:3},{to:"m",tau:14*th.api},{to:"ow",tau:30}],calt:"model"},
+      {from:"usapi",e:.50,st:"scen",ev:null,alts:[{to:"m",tau:14*th.api},{to:"ow",tau:30}],calt:"model"}];
+    case "sanofi": return [{from:"usapi",e:.25,st:"doc",ev:"sanofi",alts:[{to:"m",tau:30*th.api},{to:"ow",tau:45}],calt:"model"}];
+    case "axa": return [
+      {from:"usapi",e:.30,st:"doc",ev:"axa",alts:[{to:"m",tau:30*th.api}],calt:"model"},
+      {from:"cloud",e:.15,st:"doc",ev:"axa",alts:[{to:"sw",tau:90}],calt:"cloud"}];
+    case "orange": return [
+      {from:"m",e:.25,st:"doc",ev:"orangeM",alts:[{to:"ow",tau:7},{to:"usapi",tau:21}],calt:"model"},
+      {from:"ow",e:.25,st:"doc",ev:"orangeOss",alts:[{to:"m",tau:7}],calt:"model"}];
+    case "bnp": return [{from:"m",e:.40,st:"doc",ev:"bnp",alts:[{to:"usapi",tau:30},{to:"ow",tau:45}],calt:"model"}];
+    case "mef": return [{from:"m",e:.30,st:"doc",ev:"mef",why:"state policy (DINUM) points away from non-European providers",alts:[{to:"ow",tau:45*th.state}],calt:null}];
+    case "def": return [{from:"m",e:.50,st:"doc",ev:"defense",why:"defense workloads are not moved to foreign providers",alts:[{to:"ow",tau:60*th.state}],calt:null}];
+    case "hdh": return C.vintage==="hdh"
+      ? [{from:"sw",e:.80,st:"doc",ev:"hdhScw",alts:[],calt:"cloud"}]
+      : [{from:"cloud",e:.80,st:"doc",ev:"hdhAzure",alts:[{to:"sw",tau:th.hdh,why:"migration under way"}],calt:"cloud"}];
+    case "airbus": return [{from:"sw",e:.30,st:"doc",ev:"airbus",alts:[{to:"cloud",tau:30}],calt:"cloud"}];
+    case "msft": return [{from:"mc",e:ef,st:"doc",ev:"msMistral2026",why:"edge documented; share scenario",alts:[{to:"home",tau:tf}]}];
+    case "foundry": return [{from:"m",e:ef*.6,st:"doc",ev:"msMistral2026",why:"channel documented; share scenario",alts:[{to:"home",tau:Math.max(1,tf*.5)}]}];
+    case "flab": return [{from:"mc",e:Math.min(1,ef*2),st:"scen",ev:null,why:"compute-for-access scenario",alts:[{to:"home",tau:tf*1.5}]}];
+    case "euadm": return [{from:"m",e:Math.min(1,ef*1.5),st:"scen",ev:null,alts:[{to:"home",tau:tf}]}];
+  }
+  return [];
 }
-function drawNvidia(sc){const p1=pulse(.5,2.4),p2=pulse(2.0,4.4),p3=pulse(4.0,7.1),sl=new Set(sc.sectorLoss),support=new Set();node(BASE.nvidia,C.red,.95);node(BASE.mistral,C.red,.9);node(BASE.fcloud,C.red,.9);edge(BASE.nvidia,BASE.mistral,C.red,.45,1.5,-.05,p1);edge(BASE.nvidia,BASE.fcloud,C.red,.45,1.5,.05,p1);edge(BASE.mistral,BASE.france,C.red,.38,1.4,.02,p2);edge(BASE.fcloud,BASE.france,C.red,.38,1.4,-.02,p2);node(BASE.france,C.red,.95);BASE.sectors.forEach((s,i)=>{const bad=sl.has(s.id);edge(BASE.france,s,bad?C.red:C.green,bad?.34:.12,bad?1.3:.8,(i-3)*.004,bad?p3:null);sector(s,bad?"loss":"gain")});drawLeaves(sl,support)}
-function drawLeverage(){const p1=pulse(.6,2.7),p2=pulse(2.5,6.6),support=new Set(),loss=new Set();BASE.labs.forEach(l=>node(l,C.cyan,.16));node(BASE.france,C.gold,.85,true);node(BASE.mistral,C.gold,.95,true);edge(BASE.france,BASE.mistral,C.gold,.35,1.5,-.02,p1);BASE.foreign.forEach((f,i)=>{edge(BASE.mistral,f,C.gold,.38,1.45,(i-1)*.03,p2);node(f,C.gold,.75)});for(const f of BASE.foreign){for(let i=0;i<18;i++){const a=(rnd()-.5)*1.1, rr=.055+.04*rnd(),x=clamp(f.x+rr*Math.cos(a),.78,.97),y=clamp(f.y+rr*Math.sin(a),.07,.94);ctx.strokeStyle=rgba(C.gold,.05);ctx.beginPath();const F=P(f);ctx.moveTo(F.x,F.y);ctx.lineTo(x*W,y*H);ctx.stroke();glow(x*W,y*H,3.5,C.gold,.18)}}}
-function drawDeal(){const lp=pulse(.5,2.2),goldp=pulse(1.8,3.5),greenp=pulse(3.2,6.5),sl=new Set(["cyber"]),support=new Set();BASE.labs.forEach((l,i)=>{const bad=l.id==="anthropic";node(l,bad?C.red:C.cyan,bad?.9:.35);edge(l,BASE.france,bad?C.red:C.cyan,bad?.3:.08,1,(i-1)*.03,bad?lp:null)});node(BASE.mistral,C.gold,.9,true);edge(BASE.mistral,BASE.france,C.gold,.45,1.6,.02,goldp);node(BASE.france,C.green,.9);const fp=P(BASE.france),mp=P(BASE.mistral);ctx.font=`700 10px ${getComputedStyle(document.body).fontFamily}`;ctx.fillStyle="#ffd989";ctx.fillText("COMPUTE ↔ RELIABLE ACCESS",(fp.x+mp.x)/2-30,(fp.y+mp.y)/2-12);BASE.sectors.forEach((s,i)=>{const bad=sl.has(s.id);edge(BASE.france,s,bad?C.red:C.green,bad?.22:.24,bad?1.0:1.2,(i-3)*.004,greenp);sector(s,bad?"loss":"gain")});drawLeaves(sl,support)}
-function drawCoalition(){const redp=pulse(.4,2.5),sup=pulse(2.2,4.3),out=pulse(4.0,7.1),sl=new Set(["def","health"]),support=new Set(["cyber","finance","industry","public","research"]);BASE.labs.forEach((l,i)=>{node(l,C.red,.85);edge(l,BASE.france,C.red,.30,1.2,(i-1)*.03,redp)});BASE.coalition.forEach((p,i)=>{node(p,C.violet,.95,true);edge(p,BASE.france,C.violet,.42,1.5,(i?-.03:.03),sup)});node(BASE.mistral,C.green,.75);edge(BASE.mistral,BASE.france,C.green,.22,1.1,.02,sup);node(BASE.france,C.violet,.9);BASE.sectors.forEach((s,i)=>{const bad=sl.has(s.id),help=support.has(s.id);edge(BASE.france,s,bad?C.red:C.violet,bad?.24:.26,bad?1.1:1.25,(i-3)*.004,out);sector(s,bad?"loss":help?"support":"gain")});drawLeaves(sl,support)}
-function draw(){bg();const sc=SC[active];if(sc.kind==="labs")drawLabsScenario(sc);else if(sc.kind==="nvidia")drawNvidia(sc);else if(sc.kind==="leverage")drawLeverage();else if(sc.kind==="deal")drawDeal();else drawCoalition();
- ctx.font=`500 10px ui-monospace,SFMono-Regular,Menlo,monospace`;ctx.fillStyle=C.dim;ctx.fillText(active==="leverage"?"FRANCE / MISTRAL":"UPSTREAM",14,H-12);ctx.textAlign="right";ctx.fillText(active==="leverage"?"FOREIGN DEPENDENTS":"CRITICAL SERVICES → DOWNSTREAM ORGANIZATIONS",W-14,H-12);ctx.textAlign="left"}
-function renderText(){const sc=SC[active],b=$("scenarioBadge");b.textContent=sc.badge;b.className="badge "+sc.badgeClass;$("caption").innerHTML=`<b>${sc.title}</b><span class="small">${sc.small}</span>`;$("mImpact").textContent=sc.impact;$("mImpactS").textContent=sc.impactS;$("mSwitch").textContent=sc.sw;$("mSwitchS").textContent=sc.swS;$("mCascade").textContent=sc.cascade;$("mCascadeS").textContent=sc.cascadeS;}
-function setScenario(s){active=s;clock=0;document.querySelectorAll(".scenario").forEach(b=>b.setAttribute("aria-pressed",b.dataset.s===s?"true":"false"));renderText()}
-document.querySelectorAll(".scenario").forEach(b=>b.addEventListener("click",()=>setScenario(b.dataset.s)));
-$("play").addEventListener("click",()=>{playing=!playing;$("play").textContent=playing?"Pause":"Play";$("phaseBadge").textContent=playing?"PLAYING · NETWORK RESPONSE":"PAUSED"});
-$("restart").addEventListener("click",()=>{clock=0;playing=true;$("play").textContent="Pause";$("phaseBadge").textContent="PLAYING · UPSTREAM EVENT"});
-$("speed").addEventListener("click",()=>{speed=speed===1?1.5:speed===1.5?.65:1;$("speed").textContent=`Speed ${speed===.65?"0.65":speed}×`});
-function tick(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(playing){clock+=dt*speed;if(clock>SC[active].duration)clock=0}draw();requestAnimationFrame(tick)}
-renderText();requestAnimationFrame(tick);
-})();
+const PARTNERS={
+  DE:{name:"Germany",alts:[{kind:"cloud",label:"Industrial AI Cloud (Deutsche Telekom)",trig:["ACCEL"],tau:60,tauFor:{hdh:180},cover:1},{kind:"compute",label:"Industrial AI Cloud capacity",trig:["ACCEL"],tau:45,cover:.3}],other:"Franco-German commitment to frontier AI cooperation and world-class compute (17 Jul 2026). Health data would need about 180 days to move under French hosting rules (scenario).",ev:["germany","francoGerman"]},
+  CA:{name:"Canada",alts:[{kind:"model",label:"Cohere models",trig:["ACCEL"],tau:30,cover:1}],other:"Cohere works with the Canadian AI Safety Institute.",ev:["cohere","canada"]},
+  KR:{name:"South Korea",alts:[{kind:"compute",label:"FuriosaAI RNGD (inference only)",trig:[],tau:45,cover:.15}],other:"Leverage: SK hynix holds over half of HBM supply. RNGD is made at TSMC, a shared fabrication dependency not modeled here.",ev:["furiosa","hbm","korea"]},
+  AE:{name:"UAE",alts:[{kind:"compute",label:"Abu Dhabi capacity (Microsoft / Core42)",trig:["USCLOUD","ACCEL"],tau:60,cover:.3}],other:"Capacity sits on a US stack, so it shares the cloud trigger.",ev:["uae"]},
+  UK:{name:"United Kingdom",alts:[],other:"No substitute mapped. Its AI Security Institute is the natural evaluation partner for the safety conditions.",ev:["uk"]},
+  JP:{name:"Japan",alts:[],other:"No substitute mapped. Domestic server assembly on NVIDIA parts.",ev:["japan"]},
+  NL:{name:"Netherlands",alts:[],other:"No substitute mapped. ASML is leverage over the US stack, not a substitute.",ev:["asml"]},
+  IN:{name:"India",alts:[],other:"No substitute yet: models selected as proposals, compute ordered.",ev:["india"]}
+};
+const PCODES=Object.keys(PARTNERS);
+const UNMAPPED="Brazil, Indonesia, Singapore, other Gulf states and African states were named by Macron on 22 Sep 2026 and are not yet mapped.";
+
+/* ---------- state ---------- */
+const ST={tab:"anticipate",vintage:"oct26",event:"lab",scope:"all",W:19,lam:1,lamA:.5,f:0,T:0,p:0,unnamed:true,
+  ef:.15,tauf:30,Wx:30,flab:false,euadm:false,delta:5,tol:.25,manual:new Set(),sel:"m",lam3:[1/3,1/3,1/3],rho:.15};
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const $=id=>document.getElementById(id);
+const pct=x=>(100*x).toFixed(x<.0995&&x>0?1:0)+"%";
+function curC(over){ return Object.assign({vintage:ST.vintage,theta:TH0,scope:ST.scope,unnamed:ST.unnamed,ef:ST.ef,tauf:ST.tauf,flab:ST.flab,euadm:ST.euadm,cap:0},over||{}); }
+function params(over){ return Object.assign({W:ST.W,lam:ST.lam,lamA:ST.lamA,f:ST.f,T:ST.T,p:ST.p,delta:ST.delta},over||{}); }
+
+/* ---------- triggers carried by each node (Prop. 7: a trigger propagates along every path) ---------- */
+function trigOf(id,C,memo={}){
+  if(memo[id]) return memo[id]; if(id==="home") return new Set();
+  const s=new Set(N[id].trig||[]); for(const inp of inputsOf(id,C)) for(const t of trigOf(inp.from,C,memo)) s.add(t);
+  return memo[id]=s;
+}
+/* ---------- the SROAI model ---------- */
+function lamOf(t,P){ return (t==="ACCEL"||t==="ACCEL_FR")?P.lamA:P.lam; }
+function rInput(inp,L,opt,owner){
+  const P=opt.P, th=(opt.C.theta||TH0), cands=[];
+  const capf=opt.C.cap||0; // v4: pre-provisioned French capacity shortens switching to French providers and lets them carry more
+  for(const a of inp.alts){ if(a.to===inp.from) continue; const fr=["m","mc","sw","ow"].includes(a.to);
+    cands.push({label:a.to==="home"?"own capacity at home":N[a.to].n,to:a.to,avail:a.to==="home"?1:1-(L[a.to]||0),tau:a.tau*(fr?1-.5*capf:1),cover:Math.min(1,(a.cover??1)+(fr?.5*capf:0))}); }
+  if(inp.calt&&opt.coal&&opt.coal.length){
+    for(const c of opt.coal) for(const pa of PARTNERS[c].alts) if(pa.kind===inp.calt){
+      let avail=1; for(const t of pa.trig) if(opt.act.has(t)) avail*=1-lamOf(t,P); // a partner on an active trigger keeps only what that trigger leaves
+      const base=((pa.tauFor&&pa.tauFor[owner])||pa.tau)*(c==="DE"?th.de:1);
+      cands.push({label:PARTNERS[c].name+": "+pa.label,partner:c,avail,tau:base+P.delta*(opt.coal.length-1),cover:pa.cover});
+    }
+  }
+  let best={r0:1,alt:null,tau:null};
+  for(const c of cands){ const tau=c.tau*(1-P.p); const g=clamp((tau-P.T)/P.W,0,1); const r0=1-c.cover*c.avail*(1-g);
+    if(r0<best.r0-1e-12) best={r0,alt:c,tau}; }
+  return {r:(1-P.f)*best.r0,r0:best.r0,alt:best.alt,tau:best.tau};
+}
+function run(opt){
+  const L={},det={},C=opt.C;
+  for(const id of ORDER){
+    if(!visible(id,C)){ L[id]=0; continue; } const n=N[id];
+    if(opt.exclude&&opt.exclude.includes(id)){ L[id]=1; det[id]=[]; continue; }
+    if(n.tier==="ext"){ L[id]=n.trig.some(t=>opt.act.has(t))?(id==="gpu"?opt.P.lamA:opt.P.lam):0; continue; }
+    let s=0; det[id]=[];
+    for(const inp of inputsOf(id,C)){ const lf=L[inp.from]||0; const rr=rInput(inp,L,opt,id); const c=inp.e*lf*rr.r; s+=c; det[id].push({inp,lf,rr,c}); }
+    L[id]=Math.min(1,s);
+  }
+  return {L,det};
+}
+/* generalized node kappa: kappa_i = sum over dependents j of e_ij * r_ij (equals e*r*b when e and r are common) */
+function kappaOf(id,res,opt){
+  let inward=0,outward=0,b=0,bo=0,es=0,rs=0; const C=opt.C;
+  for(const cid of ORDER){ if(!visible(cid,C)) continue; const c=N[cid]; if(c.tier==="ext") continue;
+    for(const inp of inputsOf(cid,C)) if(inp.from===id){ const rr=rInput(inp,res.L,opt,cid); const v=inp.e*rr.r;
+      if(c.tier==="foreign"){outward+=v;bo++;} else {inward+=v;b++;es+=inp.e;rs+=rr.r;} } }
+  return {inward,outward,b,bo,ebar:b?es/b:0,rbar:b?rs/b:0};
+}
+function frIds(C){ return ORDER.filter(id=>visible(id,C)&&(N[id].tier==="anchor"||N[id].tier==="dep")); }
+function lossOnly(res,C){ let num=0,den=0; for(const id of frIds(C)){ num+=N[id].w*res.L[id]; den+=N[id].w; } return den?num/den:0; }
+function summarize(res,opt){
+  const C=opt.C, ids=frIds(C); let num=0,den=0,numFloor=0;
+  for(const id of ids){ const w=N[id].w,l=res.L[id]; num+=w*l; den+=w; if(!N[id].scen) numFloor+=w*l; }
+  const exposed=ids.filter(id=>N[id].tier==="dep"&&res.L[id]>.02); let restore=0,noSub=[];
+  for(const id of exposed) for(const d of res.det[id]) if(d.lf>0&&d.c>.001){ if(d.rr.r0>=.999) noSub.push(id); else restore=Math.max(restore,d.rr.tau||0); }
+  let kmax=0,kid=null;
+  for(const id of ["lab","usapi","cloud","gpu","ow","m","mc","sw"]){ if((res.L[id]||0)<.001) continue; const k=kappaOf(id,res,opt).inward; if(k>kmax){kmax=k;kid=id;} }
+  return {L:den?num/den:0,Lfloor:den?numFloor/den:0,exposed,restore,noSub:[...new Set(noSub)],kmax,kid};
+}
+function evalEvent(ev,coal,overP,C){ C=C||curC(); const P=params(overP); const opt={act:new Set(EVENTS[ev].trig(C)),P,coal:coal||[],C}; const res=run(opt); return {res,opt,sum:summarize(res,opt)}; }
+function coalitionSearch(ev,C,P){
+  C=C||curC(); const alone=evalEvent(ev,[],P,C).sum.L; const bySize=[]; let best=1e9;
+  for(let mask=0;mask<(1<<PCODES.length);mask++){ const coal=PCODES.filter((c,i)=>mask&(1<<i)); const L=evalEvent(ev,coal,P,C).sum.L; const k=coal.length;
+    best=Math.min(best,L); if(!bySize[k]||L<bySize[k].L-1e-12) bySize[k]={coal,L}; }
+  let pick=null; for(let k=0;k<bySize.length;k++){ if(bySize[k]&&bySize[k].L<=best+ST.tol/100+1e-12){ pick={k,...bySize[k]}; break; } }
+  return {alone,best,bySize,pick};
+}
+function exclusion(C){
+  C=C||curC(); const opt={act:new Set(),P:params({W:ST.Wx}),coal:[],exclude:["mc","m"],C}; const res=run(opt);
+  const fids=ORDER.filter(id=>visible(id,C)&&N[id].tier==="foreign"); let num=0,den=0; for(const id of fids){num+=N[id].w*res.L[id];den+=N[id].w;}
+  const kmc=kappaOf("mc",res,opt).outward, km=kappaOf("m",res,opt).outward;
+  return {res,opt,cost:den?num/den:0,kmc,km,kout:kmc+km,fids};
+}
+
+/* =====================================================================
+   NASH DRIFT ENGINE
+   Player: France. Opponent's move = the surface a major power acts on
+   (models, cloud, accelerators). France's actions = one budgeted policy.
+   Payoff on surface j = minus the weighted capability interrupted.
+   Operative payoff U = sum_j lambda_j u_j (Nash Drift, eq. aggregate).
+   Representation = the public register; completions = admissible values
+   of the unobserved scenario numbers THETA. Solution sufficiency holds at
+   lambda iff every completion has the same best-response class.
+   ===================================================================== */
+const STRATS=[
+  {id:"sq",n:"Status quo",col:"#56707a",P:{},coal:[]},
+  {id:"notice",n:"Advance-notice agreement (30 days)",col:"#57b9d8",P:{T:30},coal:[]},
+  {id:"fallback",n:"Tested fallback (30% hot standby)",col:"#3ce89e",P:{f:.3},coal:[]},
+  {id:"port",n:"Portability (switch times halved)",col:"#f2b23f",P:{p:.5},coal:[]},
+  {id:"coal",n:"Coalition: Germany + Canada",col:"#a98bf5",P:{},coal:["DE","CA"]}
+];
+const SURF=[{ev:"usapi",n:"Models"},{ev:"cloud",n:"Cloud"},{ev:"accel",n:"Accelerators"}];
+const COMPLETIONS=(()=>{ let out=[{}]; for(const t of THETA){ const nx=[]; for(const o of out) for(const v of t.lv) nx.push({...o,[t.k]:v}); out=nx; } return out; })();
+const TH0IDX=COMPLETIONS.findIndex(c=>THETA.every(t=>c[t.k]===TH0[t.k]));
+const PAY={};
+function payoffTable(vintage){
+  const key=vintage+"|"+ST.unnamed; if(PAY[key]) return PAY[key];
+  const T=[]; // T[s][theta][j] = weighted capability interrupted
+  for(const s of STRATS){ const rows=[];
+    for(const th of COMPLETIONS){ const C={vintage,theta:th,scope:"all",unnamed:ST.unnamed,ef:.15,tauf:30,flab:false,euadm:false}; const row=[];
+      for(const sf of SURF){ const P=Object.assign({W:EVENTS[sf.ev].W,lam:1,lamA:.5,f:0,T:0,p:0,delta:5},s.P);
+        const opt={act:new Set(EVENTS[sf.ev].trig(C)),P,coal:s.coal,C}; row.push(lossOnly(run(opt),C)); }
+      rows.push(row); }
+    T.push(rows); }
+  return PAY[key]=T;
+}
+function bestClass(T,lam,ti){ // best-response class: set of strategies attaining the minimum weighted loss
+  let m=1e9; const v=STRATS.map((s,si)=>{ const x=lam[0]*T[si][ti][0]+lam[1]*T[si][ti][1]+lam[2]*T[si][ti][2]; if(x<m) m=x; return x; });
+  const cls=[]; v.forEach((x,si)=>{ if(x<=m+1e-9) cls.push(si); }); return {cls,key:cls.join(","),v};
+}
+function fiberAt(T,lam){ // classes across all completions
+  const keys=COMPLETIONS.map((c,ti)=>bestClass(T,lam,ti).key); const counts={}; keys.forEach(k=>counts[k]=(counts[k]||0)+1);
+  return {keys,counts,licensed:Object.keys(counts).length===1};
+}
+function oos(keys){ // governing objects: greedy set cover over conflict pairs (Nash Drift, Appendix B)
+  const pairs=[]; for(let a=0;a<keys.length;a++) for(let b=a+1;b<keys.length;b++) if(keys[a]!==keys[b]) pairs.push([a,b]);
+  const total=pairs.length; let open=pairs; const chosen=[];
+  while(open.length){ let bestK=null,bestN=0;
+    for(const t of THETA){ if(chosen.find(c=>c.k===t.k)) continue; let n=0; for(const [a,b] of open) if(COMPLETIONS[a][t.k]!==COMPLETIONS[b][t.k]) n++; if(n>bestN){bestN=n;bestK=t;} }
+    if(!bestK) break; open=open.filter(([a,b])=>COMPLETIONS[a][bestK.k]===COMPLETIONS[b][bestK.k]); chosen.push({k:bestK.k,n:bestK.n,sep:bestN,cum:total?(total-open.length)/total:1}); }
+  return {total,chosen};
+}
+function contSet(lam,rho){ // admissible continuations of lambda: a ring of radius rho inside the simplex (no probability)
+  const pts=[lam]; const dirs=[[1,-.5,-.5],[-.5,1,-.5],[-.5,-.5,1],[-1,.5,.5],[.5,-1,.5],[.5,.5,-1]];
+  for(const r of [rho/2,rho]) for(const d of dirs){ const q=[lam[0]+r*d[0],lam[1]+r*d[1],lam[2]+r*d[2]].map(x=>Math.max(0,x)); const s=q[0]+q[1]+q[2]; pts.push(q.map(x=>x/s)); }
+  return pts;
+}
+const VLABEL={may26:"May 2026",oct26:"Oct 2026",hdh:"after HDH migration"};
+function edgeSet(vintage){ const C=curC({vintage}); const out={}; for(const id of ORDER){ if(!visible(id,C)||N[id].tier==="ext") continue; for(const inp of inputsOf(id,C)) out[inp.from+">"+id]={ev:inp.ev,from:inp.from,to:id,foreign:N[id].tier==="foreign"}; } return out; }
+function edgeDiff(a,b){ const A=edgeSet(a),B=edgeSet(b); const added=Object.keys(B).filter(k=>!A[k]).map(k=>B[k]), removed=Object.keys(A).filter(k=>!B[k]).map(k=>A[k]); return {added,removed}; }
+function driftReport(lam,vintage){
+  vintage=vintage||ST.vintage; const sn=i=>STRATS[i].n;
+  const comp=(a,b)=>{ const Ta=payoffTable(a),Tb=payoffTable(b); const ca=bestClass(Ta,lam,TH0IDX),cb=bestClass(Tb,lam,TH0IDX);
+    const prevStrat=ca.cls[0]; const drift=!cb.cls.includes(prevStrat); const diff=edgeDiff(a,b);
+    return {a,b,prev:ca.cls,cur:cb.cls,drift,diff}; };
+  // the comparison that has happened (realized) and the one still ahead (scheduled), seen from the selected register
+  const realized=vintage==="may26"?null:vintage==="hdh"?comp("oct26","hdh"):comp("may26","oct26");
+  const scheduled=vintage==="hdh"?null:vintage==="may26"?comp("may26","oct26"):comp("oct26","hdh");
+  const T=payoffTable(vintage); const fib=fiberAt(T,lam); const ob=fib.licensed?{total:0,chosen:[]}:oos(fib.keys);
+  const cs=contSet(lam,ST.rho).map(q=>bestClass(T,q,TH0IDX).key); const contRobust=new Set(cs).size===1;
+  const contStrats=[...new Set(cs.flatMap(k=>k.split(",").map(Number)))];
+  const cur=bestClass(T,lam,TH0IDX);
+  let level="ok",head="GOVERNED: ONE STRATEGY IS LICENSED";
+  if(scheduled&&scheduled.drift){ level="warn"; head="DRIFT AHEAD: A SCHEDULED CHANGE INVALIDATES TODAY'S STRATEGY"; }
+  if(!contRobust){ level="warn"; head="NO CONTINUATION-ROBUST STRATEGY"; }
+  if(!fib.licensed){ level="warn"; head="STRATEGY NOT LICENSED BY THE REGISTER"; }
+  if(realized&&realized.drift){ level="red"; head="STRATEGY DRIFT DETECTED"; }
+  return {lam,vintage,realized,scheduled,fib,ob,contRobust,contStrats,cur,level,head,sn};
+}
+function changedCells(a,b,NN){ const A=simplexCells(a,NN||28),B=simplexCells(b,NN||28); return B.filter((c,i)=>A[i].best!==c.best); }
+
+/* ---------- self-test: combined lockout is never milder than any single lockout ---------- */
+function selfTest(){
+  let checks=0,fails=0,settings=0; const base={...ST};
+  for(const scope of ["fr","all"]) for(const W of [5,19,30,90,180,365]) for(const f of [0,.3]) for(const T of [0,14]) for(const unnamed of [true,false]) for(const vintage of ["may26","oct26","hdh"]){
+    settings++; const C=curC({scope,unnamed,vintage}); const over={W,f,T,p:0,lam:1,lamA:.5};
+    const comb=evalEvent("combined",[],over,C);
+    for(const e of ["lab","usapi","cloud","accel"]){ const x=evalEvent(e,[],over,C); checks++; let ok=x.sum.L<=comb.sum.L+1e-9;
+      for(const id in x.res.L) if(x.res.L[id]>comb.res.L[id]+1e-9) ok=false; if(!ok) fails++; } }
+  Object.assign(ST,base); return {checks,fails,settings};
+}
+
+/* =====================================================================
+   v5 · LIVING-NETWORK LAYER
+   Engine above = v3 lab engine plus one documented v4 addition (C.cap:
+   capacity built before a restriction). Everything below reads it:
+   state on screen -> model run -> numbers and motion.
+   ===================================================================== */
+const UP=["lab","usapi","cloud","gpu"], HUBS=["lab","usapi","cloud","gpu","ow","m","mc","sw"];
+const DEPS=["conv","sanofi","axa","orange","bnp","mef","def","hdh","airbus"], FORS=["msft","foundry","flab","euadm"], ANCH=["ow","m","mc","sw"];
+const LBL={lab:"US lab A · top models",usapi:"US frontier models",cloud:"US hyperscale cloud",gpu:"NVIDIA chips",ow:"Open-weight models (FR)",m:"Mistral models",mc:"Mistral Compute",sw:"Scaleway",
+ conv:"Unnamed users of US models",sanofi:"Sanofi",axa:"AXA",orange:"Orange",bnp:"BNP Paribas",mef:"Economic ministries",def:"Armed Forces",hdh:"Health Data Hub",airbus:"Airbus",
+ msft:"Microsoft (EU GPUs)",foundry:"Foundry customers",flab:"Foreign lab on FR compute",euadm:"EU administrations"};
+const SHORTL={conv:"Unnamed users",mef:"Econ. ministries",hdh:"Health Data Hub",lab:"US lab A",usapi:"US models",cloud:"US cloud",gpu:"NVIDIA",ow:"Open-weight (FR)",m:"Mistral models",mc:"Mistral Compute"};
+const SHORTF={msft:"Microsoft",foundry:"Foundry customers",flab:"Foreign lab",euadm:"EU administrations"};
+const POS={lab:[-1.30,-.64,.16],usapi:[-1.36,-.21,-.24],cloud:[-1.30,.23,.22],gpu:[-1.22,.66,-.12],
+ ow:[-.53,-.60,.26],m:[-.45,-.17,-.22],mc:[-.49,.27,.24],sw:[-.56,.64,-.16],
+ conv:[.30,-.94,-.24],sanofi:[.62,-.70,.30],axa:[.34,-.46,-.34],orange:[.66,-.21,.16],bnp:[.32,.03,-.30],mef:[.64,.27,.30],def:[.30,.51,-.20],hdh:[.66,.68,.24],airbus:[.26,1.02,-.28],
+ msft:[-.88,1.28,-.40],foundry:[-.22,1.34,-.55],flab:[.42,1.32,-.50],euadm:[1.02,1.16,-.40]};
+const PPOS={NL:[-1.06,-1.10,-.30],DE:[-.72,-1.22,.30],CA:[-.36,-1.28,-.30],KR:[0,-1.28,.30],AE:[.36,-1.27,-.32],UK:[.72,-1.20,.30],JP:[1.06,-1.06,-.30],IN:[1.32,-.84,.30]};
+const DEPTH={ext:0,anchor:1,dep:2,foreign:2.5};
+const RGB={cyan:"100,199,232",green:"67,237,170",red:"255,96,120",gold:"255,200,87",violet:"185,162,255",white:"232,244,246",amber:"255,176,96",slate:"128,148,162"};
+/* Use-leverage terms: what France asks for in a compute-for-access deal (RFP 2.3.1). P = the model lever each term moves. */
+const TERMS={standby:{n:"Guaranteed critical access",short:"Critical access",d:"providers serving from French compute keep 30% of critical service running for government and critical infrastructure during a restriction",P:{f:.3},si:2},
+ notice:{n:"30-day notice",short:"30-day notice",d:"providers give 30 days' warning before any withdrawal",P:{T:30},si:1},
+ port:{n:"Portability",short:"Portability",d:"open formats and interfaces that halve the time to switch supplier",P:{p:.5},si:3}};
+/* Coalitions & coordination: a chip-supply-chain coalition bargaining jointly shrinks the chip shortfall (scenario shares). */
+const CHIP={NL:{s:.35,why:"ASML lithography"},KR:{s:.25,why:"high-bandwidth memory"},JP:{s:.10,why:"materials and equipment"}};
+const chipLev=coal=>Math.min(.8,(coal||[]).reduce((s,c)=>s+(CHIP[c]?CHIP[c].s:0),0));
+/* Illustrative euro scale: 2 million workers in these institutions and their suppliers x 10% of output running through AI x
+   EUR 101,738 output per worker (GDP EUR 2,991.1bn / 29.4 million in employment, INSEE 2025) = about EUR 20bn a year. */
+const EUR={workers:2e6,share:.10,gdp:2991.1e9,emp:29.4e6}; EUR.perWorker=EUR.gdp/EUR.emp; EUR.V=EUR.workers*EUR.share*EUR.perWorker;
+const THN={hdh:"Health Data Hub migration time",api:"enterprise switch time from US models",state:"state users' switch time",mistral:"Mistral's share on its own compute",de:"switch time to German capacity"};
+const REDUCED=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);
+const ease=x=>x<=0?0:x>=1?1:x*x*(3-2*x);
+const fx=v=>(v||0).toFixed(2);
+const frac=x=>x-Math.floor(x);
+const lb=(id,small)=>small&&SHORTL[id]?SHORTL[id]:LBL[id];
+const nmOf=id=>id.startsWith("P:")?PARTNERS[id.slice(2)].name:LBL[id]||id;
+function list(ids){ const a=ids.map(nmOf); return a.length<2?a.join(""):a.slice(0,-1).join(", ")+" and "+a[a.length-1]; }
+function days(x){ return x<1?x.toFixed(1):String(Math.round(x)); }
+function eur(x){ x=Math.max(0,x); if(x>=1e9) return "€"+(x/1e9).toFixed(x>=1e10?1:2)+"bn"; if(x>=1e7) return "€"+Math.round(x/1e6)+"m"; if(x>=1e6) return "€"+(x/1e6).toFixed(1)+"m"; if(x>=1e3) return "€"+Math.round(x/1e3)+"k"; return "€"+Math.round(x); }
+const eurL=(L,W)=>L*EUR.V*W/365;
+function mixRGB(a,b,u){ const A=a.split(",").map(Number),B=b.split(",").map(Number); return A.map((v,i)=>Math.round(v+(B[i]-v)*clamp(u,0,1))).join(","); }
+
+/* ---------------- state on screen -> model ---------------- */
+function S0(){ return {cut:{lab:0,usapi:0,cloud:0,gpu:0},Wman:null,coal:[],g:0,term:null}; }
+const cloneS=S=>({cut:{...S.cut},Wman:S.Wman,coal:S.coal.slice(),g:S.g,term:S.term});
+function trigsOf(S){ const t=[]; if(S.cut.lab)t.push("LAB"); if(S.cut.usapi)t.push("USAPI"); if(S.cut.cloud)t.push("USCLOUD"); if(S.cut.gpu)t.push(S.cut.gpu===2?"ACCEL_FR":"ACCEL"); return t; }
+function autoW(S){ const c=UP.filter(k=>S.cut[k]); if(!c.length) return 30; if(c.length===1&&c[0]==="lab") return 19; if(c.length===1&&c[0]==="gpu") return 180; return 90; }
+const Wof=S=>S.Wman||autoW(S);
+function Cof(S,g){ g=g===undefined?S.g:g; return curC({vintage:"oct26",theta:TH0,scope:S.cut.gpu===2?"fr":"all",unnamed:true,ef:.15+.45*g,tauf:30,flab:g>1/3-1e-6,euadm:g>2/3-1e-6,cap:g}); }
+function Pfor(S,term,coal){ const p={W:Wof(S),lam:1,lamA:.5*(1-chipLev(coal)),f:0,T:0,p:0,delta:5}; return term?Object.assign(p,TERMS[term].P):p; }
+const WSUM=frIds(curC({vintage:"oct26",unnamed:true})).reduce((s,id)=>s+N[id].w,0), PERW=EUR.V/WSUM;
+function evName(S){ const c=[]; if(S.cut.usapi) c.push("US frontier models"); else if(S.cut.lab) c.push("one US lab's top models");
+  if(S.cut.cloud) c.push("US cloud"); if(S.cut.gpu) c.push(S.cut.gpu===2?"US chips (France only)":"US chips (all non-US buyers)");
+  if(!c.length) return "Normal service";
+  if(c.length===1&&S.cut.lab&&!S.cut.usapi) return "One US lab withdraws its top models";
+  return c.join(" + ")+" restricted"; }
+
+const CACHE=new Map();
+function skey(S){ return [S.cut.lab,S.cut.usapi,S.cut.cloud,S.cut.gpu,Wof(S),S.coal.slice().sort().join(""),Math.round(S.g*100),S.term||""].join("|"); }
+function compute(S){
+  const key=skey(S); let R=CACHE.get(key); if(R) return R;
+  const C=Cof(S), C0=Cof(S,0), W=Wof(S), act=new Set(trigsOf(S));
+  const mk=(C,P,coal)=>{ const opt={act,P,coal,C}; const res=run(opt); return {opt,res,sum:summarize(res,opt)}; };
+  const cur=mk(C,Pfor(S,S.term,S.coal),S.coal.slice());
+  const noCoal=S.coal.length?mk(C,Pfor(S,S.term,[]),[]):cur, noTerm=S.term?mk(C,Pfor(S,null,S.coal),S.coal.slice()):cur;
+  // the four steps on this restriction, cumulative in the RFP's order
+  const wf=[mk(C0,Pfor(S,null,[]),[]).sum, S.g>0?mk(C,Pfor(S,null,[]),[]).sum:null, S.term?mk(C,Pfor(S,S.term,[]),[]).sum:null, S.coal.length?cur.sum:null];
+  const kap={}; for(const id of HUBS) if((cur.res.L[id]||0)>=.001) kap[id]=kappaOf(id,cur.res,cur.opt).inward;
+  const ex=exclusion(C); let exE=0; for(const id of ex.fids) exE+=N[id].w*(ex.res.L[id]||0)*PERW*30/365;
+  const flows=[];
+  for(const id of ORDER){ if(!visible(id,C)||N[id].tier==="ext") continue;
+    for(const d of (cur.res.det[id]||[])){
+      flows.push({from:d.inp.from,to:id,kind:N[id].tier==="foreign"?"lev":"base",e:d.inp.e,q:d.c,lf:d.lf});
+      const a=d.rr.alt; if(d.lf>.001&&a&&d.rr.r<.999){ const q=d.inp.e*d.lf*(1-d.rr.r);
+        if(a.partner) flows.push({from:"P:"+a.partner,to:id,kind:"partner",q,e:d.inp.e,label:a.label});
+        else if(a.to&&a.to!=="home"&&N[a.to]) flows.push({from:a.to,to:id,kind:"sub",q,e:d.inp.e,label:a.label}); } } }
+  const used=new Set(flows.filter(f=>f.kind==="partner").map(f=>f.from.slice(2)));
+  if(act.has("ACCEL")||act.has("ACCEL_FR")) for(const c of S.coal) if(CHIP[c]) used.add(c);
+  R={key,S:cloneS(S),C,W,act,cur,noCoal,noTerm,wf,kap,ex,exE,flows,used,L:cur.res.L};
+  CACHE.set(key,R); if(CACHE.size>600) CACHE.delete(CACHE.keys().next().value);
+  return R;
+}
+const instE=(R,id)=>(N[id].w||0)*(R.L[id]||0)*PERW*R.W/365;
+function bestCoalition(S){
+  const C=Cof(S), act=new Set(trigsOf(S)); let best=1e9; const bySize=[];
+  for(let mask=0;mask<(1<<PCODES.length);mask++){ const coal=PCODES.filter((c,i)=>mask&(1<<i)); const opt={act,P:Pfor(S,S.term,coal),coal,C}; const L=summarize(run(opt),opt).L;
+    best=Math.min(best,L); const k=coal.length; if(!bySize[k]||L<bySize[k].L-1e-12) bySize[k]={coal,L}; }
+  for(let k=0;k<bySize.length;k++) if(bySize[k]&&bySize[k].L<=best+.0025+1e-12) return {k,...bySize[k],best};
+  return null;
+}
+/* Nash Drift readout: which deal term holds up across the 162 completions (equal weight on models, cloud, chips) */
+const NASH=(()=>{ const T=payoffTable("oct26"); const fib=fiberAt(T,[1/3,1/3,1/3]); const win=STRATS.map(()=>0);
+  fib.keys.forEach(k=>k.split(",").forEach(i=>win[+i]++)); const n=COMPLETIONS.length; const ob=fib.licensed?{chosen:[]}:oos(fib.keys);
+  const share={}; for(const k in TERMS) share[k]=Math.round(100*win[TERMS[k].si]/n);
+  const first=ob.chosen[0]?{n:ob.chosen[0].n,k:ob.chosen[0].k,cum:Math.round(100*ob.chosen[0].cum)}:null;
+  return {n,share,licensed:fib.licensed,first}; })();
+
+/* ---------------- arbors: an institution's downstream users (illustrative shape, loss exactly as computed) ---------------- */
+function seeded(seed){ let s=(seed>>>0)||1; return ()=>{ s=(s*1103515245+12345)%2147483648; return s/2147483648; }; }
+const nrm=v=>{ const l=Math.hypot(v[0],v[1],v[2])||1; return [v[0]/l,v[1]/l,v[2]/l]; };
+const AR={};
+function buildArbor(id,seed,w){
+  const rnd=seeded(seed), p=POS[id], foreign=N[id].tier==="foreign";
+  const out=foreign?nrm([p[0]*.4,1,p[2]*.8]):nrm([1,p[1]*.7,p[2]*1.4]); const segs=[];
+  function br(a,dir,len,d,path,v){ if(d>4) return; const b=[a[0]+dir[0]*len,a[1]+dir[1]*len,a[2]+dir[2]*len];
+    segs.push({a,b,p0:path,p1:path+len,len,v,d,ph:rnd()*6.2832});
+    const n=d===0?3:(d>=3?2:(rnd()<.5?2:3));
+    for(let i=0;i<n;i++){ const nd=nrm([dir[0]+(rnd()-.5)*.95,dir[1]+(rnd()-.5)*.95,dir[2]+(rnd()-.5)*.95]); br(b,nd,len*(.58+rnd()*.2),d+1,path+len,v*(.5+.42*rnd())); } }
+  const L0=(foreign?.085:.095)+.075*Math.sqrt(w);
+  for(let i=0;i<3;i++){ const d0=nrm([out[0]+(rnd()-.5)*1.15,out[1]+(rnd()-.5)*1.15,out[2]+(rnd()-.5)*1.15]); br([0,0,0],d0,L0*(.85+.3*rnd()),0,0,1-.03*i); }
+  let tot=0,PM=0; for(const g of segs){ tot+=g.len; PM=Math.max(PM,g.p1); }
+  let cum=0; segs.slice().sort((x,y)=>x.v-y.v).forEach(g=>{ cum+=g.len; g.q=cum/tot; }); // a branch fails only with everything downstream of it
+  const tipc=segs.filter(g=>g.d===4); const tips=[tipc[0],tipc[Math.floor(tipc.length/2)],tipc[tipc.length-1]].filter(Boolean);
+  return {segs,PM,tips};
+}
+[...DEPS,...FORS].forEach((id,i)=>AR[id]=buildArbor(id,977+i*131,N[id].w||.5));
+const MOTES=(()=>{ const r=seeded(20261015), out=[]; for(let i=0;i<170;i++){ const u=nrm([r()-.5,r()-.5,r()-.5]), d=1.55+r()*1.1; out.push({p:[u[0]*d*1.25,u[1]*d,u[2]*d],ph:r()*6.28,sp:.1+r()*.25}); } return out; })();
+
+/* ---------------- canvas ---------------- */
+const cv=$("cv"), ctx=cv.getContext("2d"); let W=1000,H=700,DPR=1; const GEO={ox:0,oy:0,s:1,ax:1,wide:true};
+function resize(){ const r=cv.getBoundingClientRect(); DPR=Math.min(window.devicePixelRatio||1,2); W=Math.max(320,Math.round(r.width)); H=Math.max(360,Math.round(r.height));
+  cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR); layout(); }
+function layout(){ const wide=W>=1000; GEO.wide=wide; const hud=wide?352:0, top=wide?80:(W<560?58:70), bot=wide?126:(W<560?40:54);
+  const sH=(H-top-bot)/2.85, sW=(W-hud-40)/3.3; GEO.s=Math.max(60,Math.min(sH,sW)); GEO.ax=clamp(sW/sH,1,1.6);
+  GEO.oy=sW<sH?top+(H-top-bot)/2+.06*GEO.s:top+1.38*GEO.s; GEO.ox=W<560?W*.47:Math.max((W-hud)/2+(wide?6:0),1.42*GEO.s*GEO.ax+80); }
+new ResizeObserver(resize).observe(cv); resize();
+const VIEW={yaw:-.2,pitch:-.08,uyaw:0,upitch:0,lastUser:-1e9};
+function rot(p){ const cy=Math.cos(VIEW.yaw),sy=Math.sin(VIEW.yaw),cp=Math.cos(VIEW.pitch),sp=Math.sin(VIEW.pitch);
+  const x=p[0]*cy+p[2]*sy, z=-p[0]*sy+p[2]*cy, y=p[1]; return [x,y*cp-z*sp,y*sp+z*cp]; }
+function proj(p){ const r=rot(p), k=3.6/(3.6-r[2]); return [GEO.ox+r[0]*GEO.s*k*GEO.ax,GEO.oy+r[1]*GEO.s*k,r[2],k]; }
+function glow(x,y,r,rgb,a){ if(a<=.004||r<=.5) return; const g=ctx.createRadialGradient(x,y,0,x,y,r); g.addColorStop(0,`rgba(${rgb},${Math.min(1,a)})`); g.addColorStop(.32,`rgba(${rgb},${Math.min(1,a*.42)})`); g.addColorStop(1,`rgba(${rgb},0)`); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r,0,6.2832); ctx.fill(); }
+
+/* ---------------- timeline: the tour and free play share one mechanism ---------------- */
+function buildTour(){
+  const beats=[], changes=[], cursor=[]; let S=S0(), T=0;
+  const push=(t,hold)=>changes.push({t,S:cloneS(S),hold});
+  function beat(d){ const b={t0:T,dur:d.dur,step:d.step,title:d.title,cap:d.cap};
+    if(d.reset||!changes.length){ S=S0(); push(T); }
+    for(const a of d.acts||[]){ const t=T+a.at;
+      if(a.hold){ cursor.push({t,kind:"hold",dur:a.hold,target:a.target}); push(t,{t1:t+a.hold,g0:S.g,g1:a.g1}); S.g=a.g1; push(t+a.hold); }
+      else { cursor.push({t,kind:"click",target:a.target}); a.do(S); push(t); } }
+    b.Send=cloneS(S); beats.push(b); T+=d.dur; }
+  beat({dur:7,step:0,reset:true,title:"France's critical AI",
+    cap:R=>"France's critical AI runs on US suppliers (left), French providers (center) and the institutions that depend on them (right); partners sit above, foreign users of French compute below. In the RFP's words, access set abroad “can be restricted at any point, even if the intent is not hostile.” This lab measures what that would cost France, and what each of the four steps saves."});
+  beat({dur:9,step:0,title:"12 June 2026 · what actually happened",acts:[{at:1.4,target:"lab",do:S=>S.cut.lab=1}],
+    cap:R=>`One US lab withdrew its top models worldwide for 19 days, with no notice. In France it was contained: ${pct(R.cur.sum.L)} of critical capability, about ${eur(eurL(R.cur.sum.L,R.W))}, absorbed as users switched to other US models within days.`});
+  beat({dur:13,step:1,title:"Step 1 · Recognize the stakes · anticipate",acts:[{at:1.0,target:"usapi",do:S=>S.cut.usapi=1},{at:2.2,target:"cloud",do:S=>S.cut.cloud=1},{at:3.4,target:"gpu",do:S=>S.cut.gpu=1}],
+    cap:R=>`Now restrict US frontier models, cloud and chips for a quarter. ${pct(R.cur.sum.L)} of France's critical AI capability goes down, about ${eur(eurL(R.cur.sum.L,R.W))}. It is a systemic event: Mistral Compute, Scaleway and the open-weight cluster look like three French options, but all run on NVIDIA chips, the chokepoint (×${fx(R.kap.gpu)}). ${list(R.cur.sum.noSub)} have no substitute in time.`});
+  beat({dur:12,step:2,title:"Step 2 · Build leverage · node-boost",acts:[{at:1.0,target:"mc",hold:5.0,g1:1}],
+    cap:R=>`Build French capacity now. Foreign users come to depend on it: excluding France would cost them about ${eur(R.exE)} a month (×${fx(R.ex.kout)}). The same capacity protects France, because it is installed before any restriction and lets institutions move to French providers faster. Loss: ${pct(R.wf[0].L)} → ${pct(R.cur.sum.L)} (${eur(eurL(R.wf[0].L,R.W))} → ${eur(eurL(R.cur.sum.L,R.W))}).`});
+  beat({dur:12,step:3,title:"Step 3 · Use leverage well · resilience",acts:[{at:1.4,target:"#term-standby",do:S=>S.term="standby"}],
+    cap:R=>`Spend the leverage in a compute-for-access deal: guaranteed access for government and critical infrastructure keeps 30% of critical service running through a restriction. Loss: ${pct(R.noTerm.sum.L)} → ${pct(R.cur.sum.L)} (${eur(eurL(R.cur.sum.L,R.W))}). Across ${NASH.n} plausible worlds it is the best term in ${NASH.share.standby}%; measuring the Health Data Hub's migration time first settles ${NASH.first?NASH.first.cum:0}% of the doubt. The same deal carries the safety terms: evaluation access and incident reporting.`});
+  beat({dur:13,step:4,title:"Step 4 · Coalitions & coordination · triage",acts:[{at:1.0,target:"P:NL",do:S=>S.coal.push("NL")},{at:2.4,target:"P:KR",do:S=>S.coal.push("KR")},{at:3.8,target:"P:JP",do:S=>S.coal.push("JP")}],
+    cap:R=>`France cannot replace NVIDIA alone. A chip-supply-chain coalition (the Netherlands through ASML, Korea through memory, Japan) bargaining jointly shrinks the chip shortfall. Loss: ${pct(R.noCoal.sum.L)} → ${pct(R.cur.sum.L)} (${eur(eurL(R.cur.sum.L,R.W))}). ${R.cur.sum.noSub.length?`What remains is ${list(R.cur.sum.noSub)}: no partner can take over in time, so that gap is a French task.`:""}`});
+  beat({dur:9,step:0,title:"Your turn",
+    cap:R=>`The four steps took the same restriction from ${pct(R.wf[0].L)} to ${pct(R.cur.sum.L)} of critical capability, from ${eur(eurL(R.wf[0].L,R.W))} to ${eur(eurL(R.cur.sum.L,R.W))}.${R.cur.sum.kmax>=1?` ${LBL[R.cur.sum.kid]} remain${R.cur.sum.kid==="gpu"?"":"s"} the chokepoint (×${fx(R.cur.sum.kmax)}): the next lever.`:""} Your turn: click a US supplier to restrict it, a partner to bring it in, and press and hold Mistral Compute to build leverage.`});
+  return {beats,changes,cursor,dur:T};
+}
+const TOUR=buildTour();
+TOUR.changes.forEach(c=>{ Object.defineProperty(c,"R",{get(){ return compute(c.S); }}); });
+
+let MODE="tour", tourStart=performance.now()/1000, tourOff=0;
+const FREE={changes:[],S:S0(),cap:null,holding:null};
+function now(){ return performance.now()/1000; }
+function tourTime(){ return (now()-tourStart+tourOff)%TOUR.dur; }
+function stateAtTour(tt){ let k=0; for(let i=0;i<TOUR.changes.length;i++) if(TOUR.changes[i].t<=tt+1e-9) k=i; const c=TOUR.changes[k]; const S=cloneS(c.S);
+  if(c.hold){ const u=clamp((tt-c.t)/(c.hold.t1-c.t),0,1); S.g=c.hold.g0+(c.hold.g1-c.hold.g0)*u; } return {S,k}; }
+function vOf(R,id){ return id==="_L"?R.cur.sum.L:id==="_F"?R.cur.sum.Lfloor:(R.L[id]||0); }
+function delayOf(id){ if(id[0]==="_") return .45; if(id.startsWith("P:")) return .8; return (DEPTH[N[id].tier]||0)*.6; }
+function makeDisp(changes,k,t){
+  const memo={};
+  function at(kk,id,tt){ const c=changes[kk], tgt=vOf(c.R,id); if(kk===0) return tgt; const prev=changes[kk-1];
+    const d=delayOf(id), u=ease((tt-c.t-d)/.9); if(u>=1) return tgt;
+    const from=(c.t-prev.t>3.5)?vOf(prev.R,id):at(kk-1,id,c.t+d); return from+(tgt-from)*u; }
+  return id=>(id in memo)?memo[id]:(memo[id]=at(k,id,t));
+}
+function frameState(){
+  let t,changes,k,S,grow=1,beat=null;
+  if(MODE==="tour"){ t=tourTime(); const st=stateAtTour(t); S=st.S; k=st.k; changes=TOUR.changes; grow=ease(t/3.4);
+    beat=TOUR.beats.find(b=>t>=b.t0&&t<b.t0+b.dur)||TOUR.beats[0]; }
+  else { t=now(); changes=FREE.changes; k=changes.length-1; S=FREE.S; }
+  const R=compute(S), Rk=changes[k].R; const disp=makeDisp(changes,k,t);
+  return {t,changes,k,S,R,Rk,disp,grow,beat};
+}
+
+/* ---------------- drawing ---------------- */
+let PJ={}, HIT=[], HOVER=null, TAGS=[];
+function curve(a,b,bend){ const m=[(a[0]+b[0])/2,(a[1]+b[1])/2-bend,(a[2]+b[2])/2]; const pts=[];
+  for(let i=0;i<=18;i++){ const u=i/18,v=1-u; pts.push(proj([v*v*a[0]+2*v*u*m[0]+u*u*b[0],v*v*a[1]+2*v*u*m[1]+u*u*b[1],v*v*a[2]+2*v*u*m[2]+u*u*b[2]])); } return pts; }
+function strokePts(pts,rgb,a,w,dash){ if(a<=.004) return; ctx.strokeStyle=`rgba(${rgb},${Math.min(1,a)})`; ctx.lineWidth=w; if(dash) ctx.setLineDash(dash); ctx.beginPath(); pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.stroke(); if(dash) ctx.setLineDash([]); }
+function along(pts,u){ const x=u*(pts.length-1), i=Math.min(pts.length-2,Math.floor(x)), f=x-i; return [pts[i][0]+(pts[i+1][0]-pts[i][0])*f,pts[i][1]+(pts[i+1][1]-pts[i][1])*f,pts[i][3]]; }
+function particles(pts,rgb,n,speed,t,size,a,seed){ for(let i=0;i<n;i++){ const u=frac(t*speed+i/n+(seed||0)*.137); const p=along(pts,u); glow(p[0],p[1],size*p[2],rgb,a*(Math.sin(u*Math.PI)*.8+.2)); } }
+function posOf(id){ return id.startsWith("P:")?PPOS[id.slice(2)]:POS[id]; }
+function tierOf(id){ return id.startsWith("P:")?"partner":N[id].tier; }
+
+function drawBackground(F){
+  const g=ctx.createRadialGradient(GEO.ox,GEO.oy,0,GEO.ox,GEO.oy,Math.max(W,H)*.85); g.addColorStop(0,"#071a22"); g.addColorStop(.5,"#030c12"); g.addColorStop(1,"#010306");
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  ctx.globalCompositeOperation="lighter";
+  for(const m of MOTES){ const q=proj(m.p), tw=.5+.5*Math.sin(F.t*m.sp*3+m.ph), a=(.05+.13*tw)*(.4+.6*(q[2]+1.5)/3); ctx.fillStyle=`rgba(120,210,190,${a.toFixed(3)})`; const z=1+1.3*q[3]; ctx.fillRect(q[0]-z/2,q[1]-z/2,z,z); }
+}
+function drawMembrane(F){
+  const Lf=F.disp("_L"), mix=clamp(Lf*2.6,0,1), col=mixRGB(RGB.green,RGB.amber,mix), C0=[.02,0,0], RX=1.02, RY=1.1, RZ=.68;
+  const c0=proj(C0); glow(c0[0],c0[1],GEO.s*1.15,col,.07+.05*Math.sin(F.t*1.3));
+  const pt=(th,ph)=>[C0[0]+RX*Math.sin(th)*Math.cos(ph),C0[1]-RY*Math.cos(th),C0[2]+RZ*Math.sin(th)*Math.sin(ph)];
+  ctx.lineWidth=1;
+  for(let j=1;j<7;j++){ const th=j*Math.PI/7; let prev=null; for(let i=0;i<=48;i++){ const q=proj(pt(th,i/48*6.2832)); if(prev){ const a=.05+.09*(q[2]+.7)/1.4; ctx.strokeStyle=`rgba(${col},${a.toFixed(3)})`; ctx.beginPath(); ctx.moveTo(prev[0],prev[1]); ctx.lineTo(q[0],q[1]); ctx.stroke(); } prev=q; } }
+  for(let j=0;j<8;j++){ const ph=j*Math.PI/8; let prev=null; for(let i=0;i<=36;i++){ const q=proj(pt(i/36*Math.PI,ph)); if(prev){ const a=.04+.08*(q[2]+.7)/1.4; ctx.strokeStyle=`rgba(${col},${a.toFixed(3)})`; ctx.beginPath(); ctx.moveTo(prev[0],prev[1]); ctx.lineTo(q[0],q[1]); ctx.stroke(); } prev=q; } }
+}
+/* Service flows are calm; a restricted supplier's links simply go quiet. Loss is shown where it lands, not as anything in flight. */
+function drawFlows(F){
+  const R=F.R, t=F.t;
+  for(const f of R.flows){
+    const a=posOf(f.from), b=posOf(f.to); if(!a||!b) continue;
+    const ft=tierOf(f.from), pts=curve(a,b,ft==="ext"?.05:ft==="partner"?-.12:.03), k=pts[9][3];
+    if(f.kind==="base"||f.kind==="lev"){
+      const lost=f.from.startsWith("P:")?0:F.disp(f.from), healthy=1-clamp(lost*(ft==="ext"?1.6:1.4),0,1);
+      if(ft==="ext"){ strokePts(pts,healthy>.05?RGB.cyan:RGB.slate,healthy>.05?.08+.16*f.e*healthy:.16,(.6+2.4*f.e)*k,healthy>.05?null:[3,6]);
+        if(healthy>.05) particles(pts,RGB.cyan,2,.14+.08*f.e,t,3.6,.3*healthy*(.4+f.e),f.to.length+f.from.length); continue; }
+      const base=f.kind==="lev"?RGB.gold:RGB.green, col=mixRGB(base,RGB.amber,1-healthy);
+      strokePts(pts,col,(f.kind==="lev"?.16:.09)+.16*f.e*(.35+.65*healthy),(.6+2.6*f.e)*k);
+      if(healthy>.05) particles(pts,base,f.kind==="lev"?3:2,.16+.1*f.e,t,f.kind==="lev"?5:3.6,(f.kind==="lev"?.5:.32)*healthy*(.4+f.e),f.to.length+f.from.length);
+    } else {
+      const shown=clamp((t-(F.changes[F.k].t+delayOf(f.to)))/.8,0,1);
+      const rgb=f.kind==="partner"?RGB.violet:RGB.green, q=f.q*shown;
+      if(q>.001){ strokePts(pts,rgb,.25+q*4,(1+2.4*Math.min(1,q*6))*k,[5,5]); particles(pts,rgb,2+Math.round(Math.min(1,q*8)*4),.35,t,5,.8,f.to.length*7); }
+    }
+  }
+  // joint chip deal: violet ties from chip-coalition partners to NVIDIA while a chip restriction is active
+  if(R.act.has("ACCEL")||R.act.has("ACCEL_FR")) for(const c of F.S.coal) if(CHIP[c]){ const pts=curve(PPOS[c],POS.gpu,.25); strokePts(pts,RGB.violet,.3,1.6*pts[9][3],[2,5]); particles(pts,RGB.violet,3,.25,t,4.5,.7,c.length*11); }
+}
+function waveFor(F,id){ const c=F.changes[F.k]; if(F.k===0) return null; const prev=F.changes[F.k-1]; const d=vOf(c.R,id)-vOf(prev.R,id);
+  if(Math.abs(d)<.004) return null; const arr=c.t+delayOf(id), x=F.t-arr; if(x<0||x>2.4) return null;
+  const partner=c.R.flows.some(f=>f.to===id&&f.kind==="partner"); return {x,front:x/1.25,up:d>0,rgb:d>0?RGB.red:partner?RGB.violet:RGB.green,L:vOf(c.R,id),R:c.R}; }
+function drawArbor(F,id){
+  const A=AR[id], tier=N[id].tier, foreign=tier==="foreign", p0=POS[id];
+  let gf=F.grow, scale=1;
+  if(foreign){ const inp=inputsOf(id,F.R.C)[0]; const e=inp?inp.e:0; gf=clamp(e/.6,.1,1)*F.grow; scale=.75+.35*clamp(e/.6,0,1); }
+  const Lf=foreign?(F.R.L[id]||0):F.disp(id), lim=gf*A.PM*1.02, wave=waveFor(F,id);
+  const core=foreign?"255,232,160":"175,255,222", halo=foreign?RGB.gold:RGB.green;
+  const bins=[]; for(let i=0;i<8;i++) bins.push(new Path2D()); const lost=new Path2D(), wv=new Path2D(); let nl=0,nw=0;
+  const P=v=>[p0[0]+v[0]*scale,p0[1]+v[1]*scale,p0[2]+v[2]*scale];
+  for(const g of A.segs){ if(g.p0>=lim) continue; let b=g.b; if(g.p1>lim){ const f=(lim-g.p0)/(g.p1-g.p0); b=[g.a[0]+(g.b[0]-g.a[0])*f,g.a[1]+(g.b[1]-g.a[1])*f,g.a[2]+(g.b[2]-g.a[2])*f]; }
+    const A2=proj(P(g.a)), B2=proj(P(b));
+    if(wave&&Math.abs(g.p1/A.PM-wave.front)<.2){ wv.moveTo(A2[0],A2[1]); wv.lineTo(B2[0],B2[1]); nw++; }
+    if(g.q<=Lf){ lost.moveTo(A2[0],A2[1]); lost.lineTo(B2[0],B2[1]); nl++; continue; }
+    const band=Math.floor(frac((g.ph+F.t*1.7-g.p0*9)/6.2832)*4), di=(A2[2]+B2[2])/2>0?0:1; const P2=bins[band*2+di]; P2.moveTo(A2[0],A2[1]); P2.lineTo(B2[0],B2[1]); }
+  const k=proj(p0)[3], sc=GEO.s/240*k; ctx.lineCap="round";
+  const BA=[1,.78,.58,.78];
+  for(let band=0;band<4;band++) for(let di=0;di<2;di++){ const P2=bins[band*2+di], dA=di?.55:1;
+    ctx.strokeStyle=`rgba(${halo},${(.13*BA[band]*dA).toFixed(3)})`; ctx.lineWidth=4.2*sc; ctx.stroke(P2);
+    ctx.strokeStyle=`rgba(${core},${(.72*BA[band]*dA).toFixed(3)})`; ctx.lineWidth=Math.max(.7,1.15*sc); ctx.stroke(P2); }
+  if(nl){ const fl=.6+.2*Math.sin(F.t*2.2+id.length); ctx.strokeStyle=`rgba(${RGB.red},${(.09*fl).toFixed(3)})`; ctx.lineWidth=3.2*sc; ctx.stroke(lost); ctx.strokeStyle=`rgba(150,52,66,${(.55*fl).toFixed(3)})`; ctx.lineWidth=Math.max(.5,.8*sc); ctx.stroke(lost); }
+  if(nw&&wave.x<1.6){ const fade=1-clamp((wave.front-1),0,1); ctx.strokeStyle=`rgba(${wave.rgb},${(.35*fade).toFixed(3)})`; ctx.lineWidth=6*sc; ctx.stroke(wv); ctx.strokeStyle=`rgba(255,250,240,${(.7*fade).toFixed(3)})`; ctx.lineWidth=1.5*sc; ctx.stroke(wv); }
+  // the fan-out: falling percentages and euros drift out along the institution's branches as the loss lands
+  if(wave&&!foreign&&wave.L>.004){ const u=clamp(wave.x/2.4,0,1), c0=proj(p0);
+    A.tips.forEach((g,i)=>{ const q=proj(P(g.b)), dx=q[0]-c0[0], dy=q[1]-c0[1], n=Math.hypot(dx,dy)||1;
+      const txt=i===1?(wave.up?`−${eur(instE(wave.R,id))}`:"recovering"):`−${pct(wave.L)}`;
+      TAGS.push({x:q[0]+dx/n*30*u,y:q[1]+dy/n*30*u+22*u,txt,a:Math.sin(Math.min(1,u*1.4)*Math.PI)*.95,up:wave.up}); }); }
+}
+function nodeLook(F,id){
+  const tier=tierOf(id);
+  if(tier==="partner"){ const c=id.slice(2), on=F.S.coal.includes(c), used=F.R.used.has(c); return {rgb:RGB.violet,a:on?(used?.95:.78):.5,r:on?9:7,ring:on}; }
+  const L=tier==="foreign"?(F.R.L[id]||0):F.disp(id);
+  if(tier==="ext"){ const rs=L>.001; return {rgb:rs?RGB.slate:RGB.cyan,a:rs?.45:.78,r:13,restricted:rs}; }
+  if(tier==="anchor") return {rgb:mixRGB(RGB.green,RGB.amber,L*2.2),a:.9,r:11};
+  if(tier==="dep") return {rgb:L>.2?mixRGB(RGB.amber,RGB.red,(L-.2)*2):mixRGB("170,255,220",RGB.amber,L*5),a:.85,r:6+6*(N[id].w||.5)};
+  return {rgb:mixRGB(RGB.gold,RGB.amber,L*2.2),a:.85,r:6+4*(N[id].w||.5)};
+}
+function drawNodes(F){
+  const ids=[...UP,...ANCH,...DEPS,...FORS.filter(id=>visible(id,F.R.C)),...PCODES.map(c=>"P:"+c)];
+  PJ={}; for(const id of ids) PJ[id]=proj(posOf(id));
+  ids.sort((a,b)=>PJ[a][2]-PJ[b][2]); HIT=[];
+  const S=GEO.s/235;
+  ctx.globalCompositeOperation="lighter";
+  for(const id of ids){ const q=PJ[id], L=nodeLook(F,id), r=L.r*q[3]*S, pulse=1+.08*Math.sin(F.t*2+id.length);
+    glow(q[0],q[1],r*4.2*pulse,L.rgb,.32*L.a); glow(q[0],q[1],r*1.6,L.rgb,.7*L.a);
+    HIT.push({id,x:q[0],y:q[1],r:Math.max(16,r*1.9)}); }
+  ctx.globalCompositeOperation="source-over";
+  for(const id of ids){ const q=PJ[id], L=nodeLook(F,id), r=L.r*q[3]*S;
+    const g=ctx.createRadialGradient(q[0]-r*.3,q[1]-r*.35,0,q[0],q[1],r); g.addColorStop(0,`rgba(255,255,255,${L.restricted?.45:.95})`); g.addColorStop(.45,`rgba(${L.rgb},${(.9*L.a+.1).toFixed(3)})`); g.addColorStop(1,`rgba(${L.rgb},${(.35*L.a).toFixed(3)})`);
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(q[0],q[1],r,0,6.2832); ctx.fill();
+    if(L.ring){ ctx.strokeStyle=`rgba(${RGB.violet},.8)`; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(q[0],q[1],r+5+2*Math.sin(F.t*3),0,6.2832); ctx.stroke(); }
+    if(L.restricted){ ctx.fillStyle="rgba(230,238,243,.85)"; const bw=r*.22, bh=r*.9; ctx.fillRect(q[0]-bw*1.6,q[1]-bh/2,bw,bh); ctx.fillRect(q[0]+bw*.6,q[1]-bh/2,bw,bh);
+      ctx.strokeStyle="rgba(200,215,225,.35)"; ctx.lineWidth=1; ctx.setLineDash([2,4]); ctx.beginPath(); ctx.arc(q[0],q[1],r+6,0,6.2832); ctx.stroke(); ctx.setLineDash([]); }
+    if(HOVER===id){ ctx.strokeStyle="rgba(255,255,255,.75)"; ctx.lineWidth=1.3; ctx.beginPath(); ctx.arc(q[0],q[1],r+9,0,6.2832); ctx.stroke(); }
+  }
+  const hold=(MODE==="free"&&FREE.holding)?FREE.holding.id:(MODE==="tour"?tourHold(F):null);
+  for(const id of ["mc","m"]){ const q=PJ[id], r=11*q[3]*S, gg=F.S.g;
+    if(gg>0||hold===id){ ctx.strokeStyle=`rgba(${RGB.gold},.9)`; ctx.lineWidth=2.4; ctx.beginPath(); ctx.arc(q[0],q[1],r+8,-Math.PI/2,-Math.PI/2+6.2832*gg); ctx.stroke(); }
+    if(hold===id){ ctx.globalCompositeOperation="lighter"; glow(q[0],q[1],r*6,RGB.gold,.35+.15*Math.sin(F.t*9)); ctx.globalCompositeOperation="source-over"; } }
+}
+function tourHold(F){ for(const c of TOUR.cursor) if(c.kind==="hold"&&F.t>=c.t&&F.t<=c.t+c.dur) return c.target; return null; }
+/* Chokepoints: a steady amber ring where the disruption becomes systemic (kappa >= 1). No blasts. */
+function drawChokepoints(F){
+  const c=F.changes[F.k];
+  for(const id in F.Rk.kap){ const kap=F.Rk.kap[id]; if(kap<1) continue; const q=PJ[id]; if(!q) continue; if(F.k>0&&F.t<c.t+delayOf(id)+.5) continue;
+    const r=(tierOf(id)==="ext"?13:11)*q[3]*GEO.s/235+12+3*Math.min(3,kap);
+    ctx.save(); ctx.translate(q[0],q[1]); ctx.rotate(F.t*.35); ctx.strokeStyle=`rgba(${RGB.amber},.75)`; ctx.lineWidth=1.6; ctx.setLineDash([6,5]); ctx.beginPath(); ctx.arc(0,0,r,0,6.2832); ctx.stroke(); ctx.restore(); ctx.setLineDash([]); }
+}
+let FF=null;
+function pill(text,x,y,align,color,size,bg){ if(!FF) FF=getComputedStyle(document.body).fontFamily; ctx.font=`600 ${size}px ${FF}`; ctx.textBaseline="middle"; const w=ctx.measureText(text).width;
+  const x0=clamp(align==="right"?x-w:align==="center"?x-w/2:x,6,(GEO.wide?W-360:W)-w-10); ctx.fillStyle=bg||"rgba(2,6,10,.72)"; ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x0-5,y-size*.78,w+10,size*1.56,6); else ctx.rect(x0-5,y-size*.78,w+10,size*1.56); ctx.fill();
+  ctx.fillStyle=color; ctx.textAlign="left"; ctx.fillText(text,x0,y+.5); return w; }
+function drawLabels(F){
+  const small=W<700, fs=W<560?9.5:small?10:11.5, R=F.R, s=R.cur.sum, S=GEO.s/235;
+  const top=proj([.02,-1.05,0]); const run=1-F.disp("_L"), atStake=eurL(F.disp("_L"),F.Rk.W);
+  pill((small?`FRANCE · ${Math.round(run*100)}% running`:`FRANCE · ${Math.round(run*100)}% of critical AI running`)+(F.Rk.act.size&&atStake>1e5?` · ${eur(atStake)} at stake`:""),top[0],top[1],"center",run>.95?"#bff7df":run>.8?"#ffe1a6":"#ffc0cd",small?10.5:12.5,"rgba(2,6,10,.6)");
+  for(const id of UP){ const q=PJ[id], L=F.disp(id); const tag=L>.001?(id==="gpu"&&F.S.cut.gpu===2?" · restricted for France":" · restricted"):"";
+    pill(lb(id,small)+tag,q[0],q[1]+15*q[3]*S+12,"center",L>.001?"#e9d2ad":"#bfe9f7",fs+.5); }
+  for(const id of ANCH){ const q=PJ[id], L=F.disp(id); pill(`${lb(id,small)}${L>.004?"  −"+pct(L):""}`,q[0],q[1]-13*q[3]*S-12,"center",L>.004?"#ffd9b0":"#c9fbe4",fs); }
+  for(const id of DEPS){ const q=PJ[id], L=F.disp(id), ns=s.noSub.includes(id)&&L>.004; const txt=lb(id,small)+(L>.004?`  −${pct(L)}`:"")+(ns?(small?" · no sub.":" · no substitute in time"):"");
+    pill(txt,q[0]+12+12*q[3]*S,q[1],"left",L>.004?(ns?"#ffb3c0":"#ffd9b8"):"#d3f5e6",fs,ns?"rgba(48,10,18,.78)":undefined); }
+  for(const id of FORS){ if(!visible(id,R.C)) continue; const q=PJ[id], inp=inputsOf(id,R.C)[0], y0=q[1]+10*q[3]*S+12;
+    pill(small?`${SHORTF[id]} ${Math.round(inp.e*100)}%`:SHORTF[id],q[0],y0,"center","#ffe2a0",fs-1);
+    if(!small) pill(`${Math.round(inp.e*100)}% of its AI on FR compute`,q[0],y0+fs*1.45,"center","#d9c08a",fs-2.5,"rgba(2,6,10,.6)"); }
+  for(const c of PCODES){ const id="P:"+c, q=PJ[id], on=F.S.coal.includes(c); pill(PARTNERS[c].name+(on?(R.used.has(c)?" ✓ covering":" ✓ joined"):""),q[0],q[1]-9*q[3]*S-11,"center",on?"#e3d8ff":"#a796d6",fs-1,on?"rgba(26,16,52,.8)":"rgba(2,6,10,.55)"); }
+  for(const id in F.Rk.kap){ const k=F.Rk.kap[id]; if(k<1) continue; const q=PJ[id]; if(!q) continue; if(F.t<F.changes[F.k].t+delayOf(id)+.5&&F.k>0) continue;
+    const ext=tierOf(id)==="ext"; pill(`chokepoint ×${fx(k)}`,ext?q[0]-22:q[0],ext?q[1]-18:q[1]+24*q[3]*S+8,ext?"right":"center","#ffe6c4",fs-.5,"rgba(92,52,8,.85)"); }
+  for(const g of TAGS){ if(g.a<=.02) continue; ctx.globalAlpha=g.a; pill(g.txt,g.x,g.y,"center",g.up?"#ffd2da":"#c8f7e3",fs-1,g.up?"rgba(70,10,24,.8)":"rgba(6,40,28,.8)"); ctx.globalAlpha=1; }
+}
+function drawCursor(F){
+  if(MODE!=="tour") return; const t=F.t; let cur=null,prev=null;
+  for(const c of TOUR.cursor){ if(c.t-1.3<=t&&t<=c.t+(c.dur||0)+.7){ cur=c; break; } if(c.t<t) prev=c; }
+  if(!cur) return; const pos=tg=>{ if(tg.startsWith("#")){ const el=document.querySelector(tg); if(!el) return null; const a=el.getBoundingClientRect(), b=cv.getBoundingClientRect(); const x=a.left+a.width/2-b.left, y=a.top+a.height/2-b.top; return (x>=0&&x<=W&&y>=0&&y<=H)?[x,y]:null; } return PJ[tg]?[PJ[tg][0],PJ[tg][1]]:null; };
+  const to=pos(cur.target); const since=t-cur.t;
+  if(cur.target.startsWith("#")&&since>=0&&since<.08){ const el=document.querySelector(cur.target); if(el){ el.classList.add("flash"); setTimeout(()=>el.classList.remove("flash"),600); } }
+  if(!to) return; let from=prev?pos(prev.target):null; if(!from) from=[to[0]+120,to[1]+90];
+  const u=ease((t-(cur.t-1.1))/.95), x=from[0]+(to[0]-from[0])*u, y=from[1]+(to[1]-from[1])*u;
+  ctx.globalCompositeOperation="lighter"; glow(x,y,26,"255,255,255",.18); ctx.globalCompositeOperation="source-over";
+  ctx.strokeStyle="rgba(255,255,255,.9)"; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(x,y,9,0,6.2832); ctx.stroke(); ctx.fillStyle="#fff"; ctx.beginPath(); ctx.arc(x,y,2.6,0,6.2832); ctx.fill();
+  if(since>=0&&since<.6){ const v=since/.6; ctx.strokeStyle=`rgba(255,255,255,${(.8*(1-v)).toFixed(3)})`; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(x,y,9+v*30,0,6.2832); ctx.stroke(); }
+  if(cur.kind==="hold"&&since>=0&&since<=cur.dur){ ctx.strokeStyle="rgba(255,210,110,.95)"; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(x,y,15,-Math.PI/2,-Math.PI/2+6.2832*since/cur.dur); ctx.stroke(); pill("holding: building capacity…",x,y+30,"center","#ffe2a0",11); }
+}
+function draw(F){
+  ctx.setTransform(DPR,0,0,DPR,0,0); ctx.globalCompositeOperation="source-over"; ctx.globalAlpha=1; TAGS=[];
+  drawBackground(F); drawMembrane(F); drawFlows(F);
+  ctx.globalCompositeOperation="lighter";
+  for(const id of [...DEPS,...FORS]) if(visible(id,F.R.C)) drawArbor(F,id);
+  ctx.globalCompositeOperation="source-over";
+  drawNodes(F); drawChokepoints(F); drawLabels(F); drawCursor(F);
+}
+
+/* ---------------- numbers panel ---------------- */
+const TXT={};
+function setT(id,v,cls){ const el=$(id); if(!el) return; if(TXT[id]!==v){ el.textContent=v; TXT[id]=v; } if(cls!==undefined&&el.dataset.c!==cls){ el.className=el.className.replace(/\b(hot|ok|au|vi)\b/g,"").trim()+(cls?" "+cls:""); el.dataset.c=cls; } }
+function setH(id,h){ const el=$(id); if(el&&TXT[id]!==h){ el.innerHTML=h; TXT[id]=h; } }
+const WFC=["#ff6078","#ffc857","#43edaa","#b9a2ff"], WFL=[["Stakes","anticipate"],["Build leverage","node-boost"],["Use leverage","resilience"],["Coalitions","triage"]];
+const WFHINT=["restrict a supplier","hold Mistral Compute","pick a deal term","add partners"];
+function hud(F){
+  const R=F.R, Rk=F.Rk, S=F.S, settled=F.t>=F.changes[F.k].t+1.3||F.k===0, Rh=settled?Rk:F.changes[F.k-1].R, s=Rh.cur.sum, cutH=Rh.act.size>0;
+  setT("hEv",cutH?`${evName(Rh.S)} · ${Rh.W} days${Rh.S.cut.lab&&!Rh.S.cut.usapi&&!Rh.S.cut.cloud&&!Rh.S.cut.gpu&&Rh.W===19?" · as on 12 June 2026":""}`:"Normal service · click a US supplier on the left to restrict access");
+  const L=F.disp("_L"), Lf=F.disp("_F");
+  setT("hL",pct(L),L>.15?"hot":L>.004?"au":"ok");
+  setT("hE",eur(eurL(L,Rh.W))); setT("hEs",cutH?`illustrative loss over ${Rh.W} days`:"illustrative loss");
+  setT("hLs",cutH?`${pct(Lf)} documented institutions · ${pct(Math.max(0,L-Lf))} unnamed users`:"Nothing restricted: every branch is served.");
+  setT("hD",cutH?days(L*Rh.W):"0",L*Rh.W>=10?"hot":"");
+  if(cutH&&s.kid){ const sys=s.kmax>=1; setT("hK",sys?"Systemic":"Contained",sys?"hot":"ok"); setT("hKs",sys?`event · chokepoint: ${LBL[s.kid]} ×${fx(s.kmax)}`:`absorbed by substitutes (worst ×${fx(s.kmax)})`); }
+  else { setT("hK","—",""); setT("hKs","systemic event?"); }
+  if(cutH&&s.exposed.length){ const allNo=s.exposed.every(id=>s.noSub.includes(id)); setT("hR",allNo?"none":String(Math.round(s.restore)),allNo?"hot":""); setT("hRs",allNo?"no substitute reachable in time":"days until substitutes take over"); }
+  else { setT("hR","—",""); setT("hRs","days until substitutes take over"); }
+  setH("hNo",cutH&&s.noSub.length?`No substitute in time: <b>${list(s.noSub)}</b>`:"");
+  // waterfall: the same restriction through the four steps
+  if(!cutH) setH("wf",`<div class="small">Restrict a US supplier to see what is at stake and what each step saves.</div>`);
+  else { const w=Rh.wf, base=w[0].L||1e-9; let last=w[0], h="";
+    w.forEach((x,i)=>{ const on=!!x; if(on) last=x; const v=last.L, cur=MODE==="tour"&&F.beat&&F.beat.step===i+1;
+      h+=`<div class="wrow ${on?"":"off"} ${cur?"cur":""}"><span class="wn">${i+1}</span><span class="wl">${WFL[i][0]} <i>${WFL[i][1]}</i></span><span class="wb"><i style="width:${(100*v/base).toFixed(1)}%;background:${WFC[i]}"></i></span><span class="wv">${on?`${pct(v)} · ${eur(eurL(v,Rh.W))}`:WFHINT[i]}</span></div>`; });
+    const saved=eurL(w[0].L-last.L,Rh.W); h+=`<div class="wsum">${saved>1e5?`Saved by the steps taken: <b>${eur(saved)}</b> (${pct(w[0].L)} → ${pct(last.L)})`:"No step taken yet on this restriction."}</div>`;
+    setH("wf",h); }
+  // leverage: build (what France holds) and use (what it asks for)
+  const ex=R.ex, ok=ex.kout>=1;
+  setT("lE",eur(R.exE)); $("lFill").style.width=(Math.min(1,ex.kout/3)*100).toFixed(1)+"%";
+  setH("lS",ok?`<b style="color:#ffe1a0">×${fx(ex.kout)}</b> (marker ×1): excluding France is systemic abroad. Costly to exclude.`
+    :`<b style="color:#ffe1a0">×${fx(ex.kout)}</b> (marker ×1): contained abroad. <b style="color:#fff">Hold Mistral Compute</b> to build.`);
+  for(const k in TERMS){ const b=$("term-"+k); if(!b) continue; b.classList.toggle("locked",!ok); b.classList.toggle("on",S.term===k); }
+  // coalitions
+  const cutN=R.act.size>0;
+  if(!S.coal.length) setH("cS",cutN?"Click a partner above the network, or let the search pick the smallest group that helps.":"Restrict a US supplier first; partners then show what they cover.");
+  else { const chipOn=R.act.has("ACCEL")||R.act.has("ACCEL_FR"), cl=chipOn?chipLev(S.coal):0;
+    const covers=[...new Set(R.flows.filter(f=>f.kind==="partner").map(f=>f.to))], idle=S.coal.filter(c=>!PARTNERS[c].alts.length&&!CHIP[c]);
+    const bits=[]; if(cl>0) bits.push(`joint chip deal cuts the shortfall ${Math.round(cl*100)}%`); if(covers.length) bits.push(covers.length>2?`substitutes cover ${covers.length} French nodes`:`substitutes cover ${list(covers)}`); if(idle.length) bits.push(`${list(idle.map(c=>"P:"+c))}: no substitute mapped`);
+    setH("cS",`<b style="color:#e8e0ff">${list(S.coal.map(c=>"P:"+c))}</b>${bits.length?" · "+bits.join(" · "):(cutN?" · nothing to cover in this restriction":"")}`+(cutN?`<br>France: ${pct(R.noCoal.sum.L)} → <b style="color:#fff">${pct(R.cur.sum.L)}</b> (${eur(eurL(R.noCoal.sum.L-R.cur.sum.L,R.W))} saved)`:"")); }
+  $("best").disabled=!cutN;
+  setT("dur",`⏱ lasts ${Wof(S)} days`);
+  document.querySelectorAll(".steps .chip").forEach(b=>{ const k=b.dataset.b; b.classList.toggle("on",MODE==="tour"&&(k==="tour"||(F.beat&&String(F.beat.step)===k))); });
+  if(MODE==="tour"&&F.beat){ const b=F.beat, Rb=compute(b.Send); setH("cap",`<span class="k">${b.title.toUpperCase()}</span>${b.cap(Rb)}`); }
+  else if(MODE==="free"&&FREE.cap) setH("cap",FREE.cap);
+}
+function buildTerms(){ $("terms").innerHTML=Object.keys(TERMS).map(k=>`<button class="term" id="term-${k}" title="${TERMS[k].n}: ${TERMS[k].d}">${TERMS[k].short}</button>`).join("");
+  const segs=[["standby","#43edaa"],["notice","#64c7e8"],["port","#ffc857"]];
+  $("nashBox").innerHTML=`<div class="nash" style="margin-top:7px">${segs.map(([k,c])=>`<span style="width:${NASH.share[k]}%;background:${c}"></span>`).join("")}</div><div class="leg" title="Nash Drift: share of the ${NASH.n} plausible worlds (unpublished numbers varied over their range) in which each term gives the lowest loss across models, cloud and chips. Measure first: ${THN[NASH.first.k]||""}, which settles ${NASH.first?NASH.first.cum:0}% of the disagreement. Every deal also carries the safety terms: evaluation access and incident reporting.">Best in ${NASH.n} worlds: ${segs.map(([k,c])=>`<span class="sw" style="background:${c}"></span>${TERMS[k].short.toLowerCase()} ${NASH.share[k]}%`).join(" · ")}</div>`;
+  Object.keys(TERMS).forEach(k=>$("term-"+k).addEventListener("click",()=>{ goFree(); const S=FREE.S; if(compute(S).ex.kout<1){ FREE.cap=caption("locked",compute(S)); return; } S.term=S.term===k?null:k; commit(S.term?`term:${k}`:"term:off"); })); }
+
+/* ---------------- interaction ---------------- */
+function goFree(){ if(MODE==="free") return; const t=tourTime(), st=stateAtTour(t); MODE="free"; FREE.S=cloneS(st.S); FREE.changes=[{t:now()-10,S:cloneS(FREE.S),R:compute(FREE.S)}]; FREE.cap=null;
+  setH("cap",`<span class="k">YOUR TURN</span>You have the controls. The tour stopped where you took over.`); }
+function commit(kind,extra){ const S=FREE.S; const R=compute(S); FREE.changes.push({t:now(),S:cloneS(S),R}); if(FREE.changes.length>8) FREE.changes.splice(0,FREE.changes.length-8); FREE.cap=caption(kind,R,extra); }
+function sumSentence(R){ const s=R.cur.sum; if(!R.act.size) return "Normal service: nothing is restricted, every branch is served.";
+  let x=`${evName(R.S)} for ${R.W} days: <b>${pct(s.L)}</b> of France's critical AI capability goes down, about <b>${eur(eurL(s.L,R.W))}</b> (illustrative).`;
+  if(s.kid) x+=s.kmax>=1?` A <b>systemic event</b>: ${LBL[s.kid]} is the chokepoint (×${fx(s.kmax)}).`:` Contained: substitutes absorb it (worst ×${fx(s.kmax)}).`;
+  if(s.noSub.length) x+=` ${list(s.noSub)} ${s.noSub.length>1?"have":"has"} no substitute in time.`; return x; }
+function caption(kind,R,extra){
+  const S=R.S, k=kind.split(":"); let head="WHAT YOU DID", body="";
+  if(k[0]==="cut"){ head=`${S.cut[k[1]]?"ACCESS RESTRICTED":"ACCESS RESTORED"} · ${LBL[k[1]].toUpperCase()}`; body=sumSentence(R); }
+  else if(k[0]==="dur"){ head=`DURATION · ${R.W} DAYS`; body=sumSentence(R); }
+  else if(k[0]==="grow"){ head="STEP 2 · BUILD LEVERAGE · NODE-BOOST"; const e=.15+.45*S.g; body=`Foreign users now run ${Math.round(e*100)}% of their French-hosted AI on French compute: excluding France would cost them about <b>${eur(R.exE)}</b> a month (×${fx(R.ex.kout)}${R.ex.kout>=1?", a systemic event for them":""}). ${R.act.size?`The same capacity protects France: loss ${pct(R.wf[0].L)} → <b>${pct((R.wf[1]||R.wf[0]).L)}</b> on this restriction.`:"It also protects France: restrict a US supplier to see by how much."} ${R.ex.kout>=1?"France is now costly to exclude, so it can ask for terms (panel on the right).":"Not yet enough to bargain with: keep building."}`; }
+  else if(k[0]==="term"){ head="STEP 3 · USE LEVERAGE WELL · RESILIENCE"; body=k[1]==="off"?"Deal term removed. "+sumSentence(R):(R.act.size?`${TERMS[k[1]].n}: ${TERMS[k[1]].d}. Loss ${pct(R.noTerm.sum.L)} → <b>${pct(R.cur.sum.L)}</b>, saving about ${eur(eurL(R.noTerm.sum.L-R.cur.sum.L,R.W))}.`:`${TERMS[k[1]].n} is in the deal. Restrict a US supplier to see what it saves.`)+` Best term in ${NASH.share[k[1]]||0}% of ${NASH.n} plausible worlds.`; }
+  else if(k[0]==="locked"){ head="NOT CREDIBLE YET"; body=`Excluding France would be contained abroad (×${fx(R.ex.kout)}), so providers have little reason to grant terms. Build leverage first: press and hold Mistral Compute.`; }
+  else if(k[0]==="partner"){ const c=k[1], on=S.coal.includes(c), P=PARTNERS[c]; head=`STEP 4 · ${on?"JOINED":"LEFT"} · ${P.name.toUpperCase()}`;
+    const brings=[...P.alts.map(a=>a.label),...(CHIP[c]?[`joint chip bargaining (${CHIP[c].why})`]:[])];
+    if(!on) body=sumSentence(R); else if(!brings.length) body=`${P.name} joins but has no mapped substitute. ${P.other}`;
+    else if(!R.act.size) body=`${P.name} brings ${brings.join(" and ")}. Restrict a US supplier to see what it covers.`;
+    else body=`${P.name} brings ${brings.join(" and ")}. France: ${pct(R.noCoal.sum.L)} → <b>${pct(R.cur.sum.L)}</b> with the coalition so far.${(S.cut.gpu===1&&P.alts.length&&P.alts.every(a=>a.trig.includes("ACCEL"))&&!CHIP[c])?" A chip restriction on all non-US buyers squeezes this partner's capacity too.":""}`; }
+  else if(k[0]==="best"){ head="STEP 4 · SMALLEST USEFUL COALITION"; body=extra&&extra.coal.length?`${list(extra.coal.map(c=>"P:"+c))}: France ${pct(R.noCoal.sum.L)} → <b>${pct(R.cur.sum.L)}</b>, saving about ${eur(eurL(R.noCoal.sum.L-R.cur.sum.L,R.W))}. No larger group does better by more than a quarter of a point.`:"No mapped partner improves this restriction."; }
+  else if(k[0]==="reset"){ head="RESET"; body="Normal service. Click a US supplier on the left to restrict access."; }
+  return `<span class="k">${head}</span>${body}`;
+}
+function hitAt(x,y){ let best=null,bd=1e9; for(const h of HIT){ const d=Math.hypot(h.x-x,h.y-y); if(d<h.r&&d<bd){ bd=d; best=h.id; } } return best; }
+function clickNode(id){
+  const S=FREE.S;
+  if(UP.includes(id)){ if(id==="gpu") S.cut.gpu=(S.cut.gpu+1)%3; else S.cut[id]=S.cut[id]?0:1; commit("cut:"+id); return; }
+  if(id.startsWith("P:")){ const c=id.slice(2); S.coal=S.coal.includes(c)?S.coal.filter(x=>x!==c):[...S.coal,c]; commit("partner:"+c); return; }
+  if(id==="mc"||id==="m"){ S.g=S.g>=.999?0:Math.min(1,Math.floor(S.g*3+1e-6)/3+1/3); if(S.g<1e-6&&S.term) S.term=null; commit("grow"); return; }
+}
+let PD=null, MX=0, MY=0, TIPREF=false;
+cv.addEventListener("pointerdown",e=>{ const r=cv.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top; goFree(); const id=hitAt(x,y);
+  PD={x:e.clientX,y:e.clientY,id,yaw:VIEW.uyaw,pitch:VIEW.upitch,moved:false}; try{cv.setPointerCapture(e.pointerId);}catch(_){}
+  if(id==="mc"||id==="m"){ PD.holdTimer=setTimeout(()=>{ if(PD&&!PD.moved){ FREE.holding={id,g0:FREE.S.g,t0:now()}; } },260); } });
+cv.addEventListener("pointermove",e=>{ const r=cv.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top; MX=x; MY=y;
+  if(PD){ const dx=e.clientX-PD.x, dy=e.clientY-PD.y; if(!PD.moved&&Math.hypot(dx,dy)>6&&!FREE.holding){ PD.moved=true; clearTimeout(PD.holdTimer); }
+    if(PD.moved){ VIEW.uyaw=clamp(PD.yaw+dx*.008,-.85,.85); VIEW.upitch=clamp(PD.pitch+dy*.006,-.55,.55); VIEW.lastUser=now(); cv.style.cursor="grabbing"; } return; }
+  const id=hitAt(x,y); HOVER=id; cv.style.cursor=id?"pointer":"grab"; showTip(id,x,y); });
+function endPD(){ if(!PD) return; clearTimeout(PD.holdTimer);
+  if(FREE.holding){ FREE.holding=null; commit("grow"); } else if(!PD.moved&&PD.id){ clickNode(PD.id); TIPREF=true; }
+  PD=null; cv.style.cursor=HOVER?"pointer":"grab"; }
+cv.addEventListener("pointerup",endPD); cv.addEventListener("pointercancel",endPD);
+cv.addEventListener("pointerleave",()=>{ HOVER=null; $("tip").style.opacity=0; });
+function showTip(id,x,y){ const el=$("tip"); if(!id){ el.style.opacity=0; return; } const F=LASTF; if(!F) return; const R=F.R; let h=""; const tier=tierOf(id);
+  if(tier==="ext"){ const L=R.L[id]||0; h=`<b>${LBL[id]}</b><br>${L>.001?"Access restricted in this scenario (export control, staged release or rationing; intent need not be hostile).":"Serving France normally."}<span class="a">${id==="gpu"?(F.S.cut.gpu===0?"Click: restrict for all non-US buyers":F.S.cut.gpu===1?"Click: restrict for France only":"Click: restore access"):L>.001?"Click to restore access":"Click to restrict access"}</span>`; }
+  else if(tier==="anchor"){ h=`<b>${LBL[id]}</b><br>Interrupted: ${pct(R.L[id]||0)}. ${["ow","mc","sw"].includes(id)?"Runs on NVIDIA chips.":"Trained and served mostly on Mistral Compute."}${id==="mc"||id==="m"?`<span class="a">Press and hold to build leverage (French capacity)</span>`:""}`; }
+  else if(tier==="dep"){ const det=R.cur.res.det[id]||[]; h=`<b>${LBL[id]}</b><br>Interrupted: <b>${pct(R.L[id]||0)}</b>${R.act.size?` · about ${eur(instE(R,id))} over ${R.W} days (illustrative)`:""}<br>`+det.map(d=>`${Math.round(d.inp.e*100)}% depends on ${LBL[d.inp.from]}${d.lf>.001?(d.rr.alt?` → ${d.rr.alt.label}${d.rr.tau!=null?`, ${Math.round(d.rr.tau)} days`:""}`:" → no substitute in time"):""}`).join("<br>"); }
+  else if(tier==="foreign"){ const inp=inputsOf(id,R.C)[0]; h=`<b>${LBL[id]}</b><br>${Math.round(inp.e*100)}% of its AI work runs on ${LBL[inp.from]}.<br>Would lose <b>${pct(R.ex.res.L[id]||0)}</b> if France were excluded.${N[id].scen?"<br><i>Scenario node: appears as French capacity grows.</i>":""}`; }
+  else { const c=id.slice(2), P=PARTNERS[c]; h=`<b>${P.name}</b><br>${P.alts.length?P.alts.map(a=>`${a.label} · ${a.tau} days · carries up to ${Math.round(a.cover*100)}%`).join("<br>"):(CHIP[c]?"":"No substitute mapped.")}${CHIP[c]?`${P.alts.length?"<br>":""}Joint chip deal: cuts the chip shortfall by ${Math.round(CHIP[c].s*100)}% (${CHIP[c].why}; scenario)`:""}<br><span style="color:#a9bcc5">${P.other}</span><span class="a">${F.S.coal.includes(c)?"Click to remove from the coalition":"Click to bring into the coalition"}</span>`; }
+  el.innerHTML=h; const b=$("stage").getBoundingClientRect(), r=cv.getBoundingClientRect(); let tx=x+(r.left-b.left)+16, ty=y+(r.top-b.top)+14;
+  el.style.opacity=1; const w=el.offsetWidth||260, hh=el.offsetHeight||80; if(tx+w>b.width-8) tx=x+(r.left-b.left)-w-16; if(ty+hh>b.height-8) ty=b.height-hh-8; el.style.left=tx+"px"; el.style.top=ty+"px"; }
+const STEPBEAT={tour:0,"1":2,"2":3,"3":4,"4":5};
+document.querySelectorAll(".steps .chip").forEach(b=>b.addEventListener("click",()=>{ MODE="tour"; tourOff=TOUR.beats[STEPBEAT[b.dataset.b]].t0; tourStart=now(); VIEW.uyaw=0; VIEW.upitch=0; }));
+$("dur").addEventListener("click",()=>{ goFree(); const S=FREE.S, opts=[19,30,90,180], w=Wof(S); S.Wman=opts[(opts.indexOf(w)+1)%opts.length]||opts[0]; commit("dur"); });
+$("reset").addEventListener("click",()=>{ goFree(); FREE.S=S0(); commit("reset"); VIEW.uyaw=0; VIEW.upitch=0; });
+$("best").addEventListener("click",()=>{ goFree(); const S=FREE.S; if(!trigsOf(S).length) return; const b=bestCoalition(S); if(b) S.coal=b.coal.slice(); commit("best",b); });
+buildTerms();
+document.querySelector('[data-b="tour"]').textContent=`▶ Watch the ${Math.round(TOUR.dur/5)*5}-second tour`;
+
+/* ---------------- method & sources ---------------- */
+(function(){ const st=selfTest(); const rows=Object.values(S_).map(s=>`<tr><td>${s.d||"—"}</td><td><a href="${s.u}" target="_blank" rel="noopener">${s.t}</a>${s.sec?' <span class="mono">(secondary)</span>':""}</td><td>${s.use}</td></tr>`).join("");
+  $("method").innerHTML=`<p><b>Percentages (computed).</b> Each French institution's interrupted share is exposure × share of the input lost × non-recoverability, summed over its inputs. Non-recoverability falls only when an alternative exists that does not sit on the same restriction and can be reached inside the window: r = (1 − f) × [1 − cover × available × (1 − g)], with g = (switch time − notice)/window, clipped to [0, 1]. The headline percentage weights institutions by criticality (scenario weights). "Days of total blackout, equivalent" is that percentage times the duration.</p>
+  <p><b>Euros (illustrative).</b> Scale: ${(EUR.workers/1e6).toFixed(0)} million workers in these institutions and their suppliers (scenario) × ${Math.round(EUR.share*100)}% of their output running through AI (scenario) × €${Math.round(EUR.perWorker).toLocaleString("en-US")} of output per worker (GDP €2,991.1bn ÷ 29.4 million in employment, INSEE 2025) = about ${eur(EUR.V)} a year of AI-dependent critical activity, shared across institutions by the criticality weights. A loss is that annual value × the interrupted share × days/365. Measured exposures from the funded work replace both scenario settings.</p>
+  <p><b>Systemic event or contained.</b> A supplier's transmission factor is κ = Σ e × r over the institutions that depend on it (with common e and r this is The Systemic Risk of AI's κ = e·r·b). At κ ≥ 1 each failure takes down more than one institution's worth of capability and the disruption propagates: a systemic event, with that supplier as the chokepoint. Below 1 the disruption is contained by substitutes.</p>
+  <p><b>The four steps.</b> (1) <i>Recognize the stakes · anticipate</i>: the restriction alone. (2) <i>Build leverage · node-boost</i>: holding Mistral Compute grows the share of foreign users' AI hosted in France from 15% to 60%; capacity built before a restriction keeps running (French compute's exposure to new-chip supply falls by up to 35%) and lets institutions move to French providers in half the time, with up to 50 points more of the load (scenario settings). (3) <i>Use leverage well · resilience</i>: deal terms are credible only once excluding France is systemic abroad (outward κ ≥ 1); guaranteed critical access keeps 30% of critical service running, notice gives 30 days, portability halves switching times. (4) <i>Coalitions &amp; coordination · triage</i>: partners enter with documented substitutes, each carrying the restrictions it sits on; a chip-supply-chain coalition bargaining jointly shrinks the chip shortfall (Netherlands 35%, Korea 25%, Japan 10%, capped at 80%; scenario). The waterfall applies the steps in this order to the same restriction.</p>
+  <p><b>Which term holds up.</b> Nash Drift: the unobserved scenario numbers (Health Data Hub migration time, switch times, Mistral's share on its own compute, German switch time) take ${NASH.n} admissible combinations. A term is best in a world if it gives the lowest loss averaged over the three restrictions (models, cloud, chips); the first measurement is chosen by greedy set cover over the worlds that disagree.</p>
+  <p><b>Self-test.</b> The combined restriction is never milder than any single one, overall and institution by institution: ${st.checks-st.fails} of ${st.checks} comparisons pass over ${st.settings} settings.</p>
+  <p class="mono">Conditional severities given the restriction, not probabilities. Branches around institutions are illustrative; their loss is driven exactly by the computed share.</p>
+  <table><tr><th>Date</th><th>Source</th><th>Used for</th></tr><tr><td>2026</td><td><a href="https://www.insee.fr/fr/statistiques/8988793" target="_blank" rel="noopener">INSEE, Comptes nationaux annuels 2025</a> · <a href="https://www.insee.fr/fr/statistiques/8733041" target="_blank" rel="noopener">INSEE, personnes en emploi</a></td><td>GDP €2,991.1bn and 29.4 million in employment: output per worker for the euro scale</td></tr>${rows}</table>`;
+  $("foot").textContent=`Self-test ${st.checks-st.fails}/${st.checks} · conditional severities, not probabilities · euros illustrative · evidence as of ${TODAY}`; })();
+
+/* ---------------- loop ---------------- */
+let LASTF=null;
+function frame(){
+  const F=frameState(); LASTF=F; const t=F.t;
+  const sway=REDUCED?0:(MODE==="tour"?1:clamp((now()-VIEW.lastUser-3)/2,0,1));
+  VIEW.yaw=-.2+VIEW.uyaw+sway*.3*Math.sin(t*2*Math.PI/26); VIEW.pitch=-.08+VIEW.upitch+sway*.06*Math.sin(t*2*Math.PI/31);
+  if(MODE==="free"&&FREE.holding){ const h=FREE.holding; FREE.S.g=clamp(h.g0+(now()-h.t0)*.3,0,1); FREE.cap=caption("grow",compute(FREE.S)); }
+  draw(F); hud(F); if(TIPREF&&HOVER){ TIPREF=false; showTip(HOVER,MX,MY); } requestAnimationFrame(frame);
+}
+window.SROAI4={hit:()=>HIT.map(h=>({id:h.id,x:h.x,y:h.y})),free:()=>({S:FREE.S,cap:FREE.cap,mode:MODE}),TOUR,compute,S0,NASH,EUR,bestCoalition,selfTest,frameAt:(tt)=>{ MODE="tour"; tourOff=tt; tourStart=now(); },state:()=>LASTF&&{S:LASTF.S,L:LASTF.R.cur.sum.L,mode:MODE}};
+requestAnimationFrame(frame);
+
 </script>
-</body></html>
+</body>
+</html>
